@@ -1,11 +1,11 @@
 import type { ToggleOptions } from "@shared/model/toggle";
-import { FormField } from "./FormField";
 import cn from "@shared/lib/cn";
 import { Input2 } from "./Input2";
 
 type ToggleFieldProps = {
-  label: string;
+  label?: string;
   labelSuffix?: string;
+  labelClassName?: string;
   value: string | number | undefined;
   onChange: (value: string) => void;
   options: ToggleOptions;
@@ -15,21 +15,33 @@ type ToggleFieldProps = {
 export default function ToggleField({
   label,
   labelSuffix,
+  labelClassName,
   value,
   onChange,
   options,
   name,
 }: ToggleFieldProps) {
   return (
-    <FormField
-      as="fieldset"
-      label={label}
-      labelSuffix={`(${labelSuffix})`}
-      className="space-y-3"
-      labelClassName="flex-col items-start gap-1 text-[10px] uppercase tracking-tight text-ink-500 md:min-h-9"
-    >
+    <div className="space-y-2 relative">
+      {label ? (
+        <div
+          className={cn(
+            "flex flex-wrap items-center gap-1 text-sm font-bold text-ink-800",
+            labelClassName,
+          )}
+        >
+          <span>{label}</span>
+          {labelSuffix ? (
+            <span className="text-xs font-normal text-ink-500">
+              ({labelSuffix})
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+
       <div
         role="radiogroup"
+        aria-label={label || name || "toggle field"}
         className="inline-grid w-full max-w-60 grid-cols-2 rounded-full border border-ink-200 bg-ink-50 p-1"
       >
         {options.map((option) => (
@@ -56,6 +68,6 @@ export default function ToggleField({
           </label>
         ))}
       </div>
-    </FormField>
+    </div>
   );
 }

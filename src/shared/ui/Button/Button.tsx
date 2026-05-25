@@ -14,6 +14,8 @@ const buttonVariants = cva(
         ghost: "px-5 text-(--mis-color-ink-700) hover:bg-(--mis-color-ink-100)",
         danger:
           "bg-(--mis-color-error-500) px-5 text-white hover:bg-(--mis-color-error-600)",
+        outline:
+          "border border-(--mis-color-ink-300) bg-transparent px-5 text-(--mis-color-ink-800) hover:bg-(--mis-color-ink-50)",
       },
       size: {
         sm: "h-auto px-3 py-3 text-sm",

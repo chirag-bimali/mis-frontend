@@ -1,12 +1,6 @@
 import { Home } from "lucide-react";
-import { FormField, Input, Select, Textarea } from "@shared/ui/Input";
+import { FormField, Select } from "@shared/ui/Input";
 import {
-  FLOOR_MATERIAL_OPTIONS,
-  RESIDENCE_TYPE_OPTIONS,
-  ROOF_MATERIAL_OPTIONS,
-  TOILET_FACILITY_OPTIONS,
-  WATER_SOURCE_OPTIONS,
-  YES_NO_OPTIONS,
   DISTRICT_OPTIONS,
   REASON_FOR_MIGRATION_OPTIONS,
 } from "../model/residence-options";
@@ -114,10 +108,10 @@ export default function ResidenceFormPage() {
       </header>
 
       <form
-        className="custom-scrollbar flex-1 overflow-y-auto"
+        className="custom-scrollbar flex-1 overflow-y-auto flex flex-col"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="mx-auto space-y-12 px-17 py-13 md:px-16 md:py-12">
+        <div className="space-y-12 px-17 py-13 md:px-16 md:py-12 flex-1">
           <div className="grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-2">
             <FormField
               as="div"
@@ -135,174 +129,6 @@ export default function ResidenceFormPage() {
                     )}
                     value={field.value}
                     onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Housing Type"
-              labelSuffix="(आवासको प्रकार)"
-            >
-              <Controller
-                control={control}
-                name="housingType"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select housing type"
-                    options={RESIDENCE_TYPE_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Roof Material"
-              labelSuffix="(छानाको प्रकार)"
-            >
-              <Controller
-                control={control}
-                name="roofMaterial"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select roof material"
-                    options={ROOF_MATERIAL_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Floor Material"
-              labelSuffix="(भुइँको प्रकार)"
-            >
-              <Controller
-                control={control}
-                name="floorMaterial"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select floor material"
-                    options={FLOOR_MATERIAL_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Water Source"
-              labelSuffix="(पानीको स्रोत)"
-            >
-              <Controller
-                control={control}
-                name="waterSource"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select water source"
-                    options={WATER_SOURCE_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Toilet Facility"
-              labelSuffix="(शौचालय सुविधा)"
-            >
-              <Controller
-                control={control}
-                name="toiletFacility"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select toilet facility"
-                    options={TOILET_FACILITY_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Electricity Access"
-              labelSuffix="(बिजुली पहुँच)"
-            >
-              <Controller
-                control={control}
-                name="electricityAccess"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select option"
-                    options={YES_NO_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Internet Access"
-              labelSuffix="(इन्टरनेट पहुँच)"
-            >
-              <Controller
-                control={control}
-                name="internetAccess"
-                render={({ field }) => (
-                  <Select
-                    placeholder="Select option"
-                    options={YES_NO_OPTIONS}
-                    value={field.value}
-                    onChange={(v) => field.onChange(v)}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField as="div" label="Room Count" labelSuffix="(कोठा संख्या)">
-              <Controller
-                control={control}
-                name="roomCount"
-                render={({ field }) => (
-                  <Input
-                    type="number"
-                    min={1}
-                    placeholder="Enter number of rooms"
-                    value={field.value || 1}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                )}
-              />
-            </FormField>
-
-            <FormField
-              as="div"
-              label="Remarks"
-              labelSuffix="(टिप्पणी)"
-              className="md:col-span-2"
-            >
-              <Controller
-                control={control}
-                name="remarks"
-                render={({ field }) => (
-                  <Textarea
-                    placeholder="Write any additional notes"
-                    value={field.value ?? ""}
-                    onChange={(e) => field.onChange(e.target.value)}
                   />
                 )}
               />
