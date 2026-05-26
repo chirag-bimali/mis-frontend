@@ -23,6 +23,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       placeholder,
       children,
       value,
+      onChange,
       ...props
     },
     ref,
@@ -32,6 +33,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           value={value}
+          onChange={onChange}
           className={cn(
             "relative h-12 w-full appearance-none rounded-lg border bg-ink-50 px-4 pr-11 text-sm font-semibold outline-none transition-colors",
             hasError
