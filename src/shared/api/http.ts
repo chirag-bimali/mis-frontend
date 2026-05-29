@@ -1,25 +1,31 @@
 import axios, { AxiosError } from "axios";
 import type { InternalAxiosRequestConfig } from "axios";
 import { env } from "@shared/config/env";
+import type { ApiResponse } from "@shared/model";
 
-export type ApiError = {
-  status: number;
-  code: string;
-  message: string;
-  error?: unknown;
-};
+// export type ApiError = {
+//   status: number;
+//   code: string;
+//   message: string;
+//   error?: unknown;
+// };
 
-const buildError = (error: AxiosError): ApiError => {
-  const status = error.response?.status ?? 0;
-  const data = error.response?.data as
-    | { code?: string; message?: string; error?: unknown }
-    | undefined;
+const buildError = (error: AxiosError): ApiResponse<object> => {
+  const data = error.response?.data as ApiResponse<object>;
+
+  if (data) return data;
 
   return {
-    status,
-    code: data?.code ?? "UNKNOWN_ERROR",
-    message: data?.message ?? error.message ?? "Something went wrong",
-    error: data?.error,
+    message: error.message,
+    success: false,
+    statusCode: error.response?.status || 500,
+    timestamp: new Date(),
+    error: {
+      code: "UNKNOWN_ERROR",
+      message: "An unknown error occurred",
+      details: {},
+      rowErrors: {},
+    },
   };
 };
 

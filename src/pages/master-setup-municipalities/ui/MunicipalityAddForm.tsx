@@ -1,30 +1,40 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { useCallback, useMemo, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { cva } from "class-variance-authority";
-import { Building2, Save, X } from "lucide-react";
+import { Save, Building2 } from "lucide-react";
 
-import cn from "@shared/lib";
 import { useCreateMunicipality } from "../api";
-import type { Municipality } from "../model";
+import {
+  createMunicipalitySchema,
+  type CreateMunicipality,
+  type Municipality,
+} from "../model";
+import { FormField } from "@shared/ui/Input/FormField";
+import { Input, Select } from "@shared/ui/Input";
+import SearchSelect from "@shared/ui/Input/SearchSelect";
+import { useSearchDistricts } from "../../../entities/district/hooks/district.query";
+import { useAreasByDistrict } from "../../../entities/area/hooks/area.query";
+import { Modal } from "@shared/ui/Modal";
+import { Button } from "@shared/ui/Button";
+import { mapServerErrors } from "@shared/util/mapServerErrors";
+import type { ApiResponse } from "@shared/model";
 
-const actionButtonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors",
-  {
-    variants: {
-      variant: {
-        ghost: "text-(--mis-color-ink-700) hover:text-(--mis-color-ink-900)",
-        primary:
-          "bg-(--mis-color-pri-500) text-white shadow-(--mis-shadow-focus) hover:bg-(--mis-color-pri-600)",
-      },
-    },
-    defaultVariants: {
-      variant: "ghost",
-    },
-  },
-);
-
-const fieldClass =
-  "h-14 w-full rounded-xl border border-(--mis-color-ink-300) bg-(--mis-color-white) px-4 text-sm text-(--mis-color-ink-800) placeholder:text-(--mis-color-ink-500) outline-none transition-colors focus:border-(--mis-color-pri-600)";
+// const actionButtonVariants = cva(
+//   "inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors",
+//   {
+//     variants: {
+//       variant: {
+//         ghost: "text-(--mis-color-ink-700) hover:text-(--mis-color-ink-900)",
+//         primary:
+//           "bg-(--mis-color-pri-500) text-white shadow-(--mis-shadow-focus) hover:bg-(--mis-color-pri-600)",
+//       },
+//     },
+//     defaultVariants: {
+//       variant: "ghost",
+//     },
+//   },
+// );
 
 interface MunicipalityAddProps {
   className?: string;
@@ -35,55 +45,53 @@ interface MunicipalityAddProps {
 
 type MunicipalityFormValues = Omit<Municipality, "id">;
 
-interface FieldProps {
-  label: string;
-  placeholder: string;
-  className?: string;
-  startIcon?: React.ReactNode;
-  registration?: ReturnType<typeof useForm<MunicipalityFormValues>>["register"];
-  name?: keyof MunicipalityFormValues;
-}
-
-function Field({
-  label,
-  placeholder,
-  className,
-  startIcon,
-  registration,
-  name,
-}: FieldProps) {
-  return (
-    <div className={cn("space-y-3", className)}>
-      <label className="block text-xs font-semibold uppercase tracking-[0.08em] text-(--mis-color-ink-500)">
-        {label}
-      </label>
-      <div className="relative">
-        {startIcon && (
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-(--mis-color-ink-500)">
-            {startIcon}
-          </span>
-        )}
-        <input
-          type="text"
-          placeholder={placeholder}
-          className={cn(fieldClass, startIcon && "pl-11")}
-          {...(registration && name ? registration(name) : {})}
-        />
-      </div>
-    </div>
-  );
-}
-
 export function MunicipalityAddForm({
-  className,
   onClose,
   onDismiss,
   onConfirm,
 }: MunicipalityAddProps) {
   const createMunicipalityMutation = useCreateMunicipality();
+  // District search state (prepared setup)
+  const [districtQuery, setDistrictQuery] = useState("");
+  const [selectedDistrictId, setSelectedDistrictId] = useState<string | null>(
+    null,
+  );
+  const { data: districtSearchResults = [], isLoading: isDistrictLoading } =
+    useSearchDistricts(districtQuery);
+  const { data: areaResults = [], isLoading: isAreaLoading } =
+    useAreasByDistrict(selectedDistrictId || "");
 
-  const { register, handleSubmit } = useForm<MunicipalityFormValues>({
+  const districtOptions = useMemo(
+    () =>
+      districtSearchResults.map((d) => ({
+        labelEn: d.nameEn,
+        value: d.id!,
+        id: d.id!,
+        labelNe: d.nameNe,
+      })),
+    [districtSearchResults],
+  );
+
+  const areaOptions = useMemo(
+    () =>
+      areaResults.map((area) => ({
+        labelEn: String(area.number),
+        value: area.id,
+      })),
+    [areaResults],
+  );
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    setValue,
+    setError,
+    formState: { errors },
+  } = useForm<CreateMunicipality>({
+    resolver: zodResolver(createMunicipalitySchema),
     defaultValues: {
+      areaId: "",
       code: "",
       nameNe: "",
       nameEn: "",
@@ -95,138 +103,191 @@ export function MunicipalityAddForm({
     },
   });
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
+    // ✅ stable reference
     onClose?.();
-  };
+  }, [onClose]);
 
-  const handleDismiss = () => {
+  const handleDismiss = useCallback(() => {
+    // ✅ stable reference
     onDismiss?.();
     onClose?.();
-  };
+  }, [onDismiss, onClose]);
 
-  const onSubmit = async (values: MunicipalityFormValues) => {
-    try {
-      await createMunicipalityMutation.mutateAsync(values);
-      onConfirm?.();
-      onClose?.();
-    } catch (error) {
-      console.error("Create municipality failed:", error);
-    }
-  };
+  const onSubmit = useCallback(
+    async (values: MunicipalityFormValues) => {
+      try {
+        await createMunicipalityMutation.mutateAsync(values, {
+          onError: (response: ApiResponse<object>) => {
+            if (response.error?.details) {
+              mapServerErrors(response.error.details, setError);
+            }
+          },
+        });
+        onConfirm?.();
+        onClose?.();
+      } catch {
+        console.error("Failed to create municipality");
+      }
+    },
+    [createMunicipalityMutation, onConfirm, onClose, setError],
+  );
 
   return (
-    <section
-      className={cn(
-        "min-h-screen h-dvh overflow-hidden bg-(--mis-color-ink-50) p-5 md:p-8",
-        className,
-      )}
+    <Modal
+      isOpen={true}
+      title="Add Municipality"
+      description="Fill in the details for the new municipality."
+      onClose={handleClose}
+      Icon={Building2}
     >
-      <form
-        className="mx-auto w-full max-w-2xl overflow-hidden rounded-3xl border border-(--mis-color-ink-200) bg-(--mis-color-white) shadow-(--mis-shadow-lg)"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <header className="flex items-start justify-between border-b border-(--mis-color-ink-200) px-16 py-8 md:px-10">
-          <div className="flex items-center gap-5">
-            <div className="grid h-14 w-14 place-items-center rounded-xl border border-(--mis-color-pri-500) bg-(--mis-color-pri-50) text-(--mis-color-pri-600)">
-              <Building2 className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-semibold leading-none tracking-[-0.025em] text-(--mis-color-ink-900)">
-                Municipality Entity
-              </h1>
-              <p className="mt-2 text-[13px] font-semibold uppercase tracking-[0.12em] text-(--mis-color-ink-500)">
-                Sovereign Registry Entry
-              </p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={handleClose}
-            className="rounded-lg p-2 text-(--mis-color-ink-600) transition-colors hover:bg-(--mis-color-ink-100) hover:text-(--mis-color-ink-900)"
-          >
-            <X className="h-7 w-7" />
-          </button>
-        </header>
-
+      <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="h-104 grid grid-cols-2 gap-x-5 gap-y-8 overflow-y-scroll px-8 py-20 md:grid-cols-2 md:px-12 md:py-12">
-          <Field
-            className="md:col-span-2"
+          <FormField
+            label="District"
+            labelSuffix="(search)"
+            className="relative"
+          >
+            <SearchSelect
+              searchValue={districtQuery}
+              onSearchValueChange={setDistrictQuery}
+              onReset={() => {
+                setSelectedDistrictId(null);
+                setValue("areaId", "");
+              }}
+              onSelect={(opt) => {
+                setSelectedDistrictId(opt.id);
+                setValue("areaId", "");
+              }}
+              selectedKey={selectedDistrictId || ""}
+              options={districtOptions}
+              loading={isDistrictLoading}
+              placeholder="Type district name..."
+            />
+          </FormField>
+
+          <Controller
+            name="areaId"
+            control={control}
+            render={({ field }) => {
+              return (
+                <FormField
+                  label="Area no."
+                  labelSuffix="क्षेत्र नम्बर"
+                  errorText={errors.areaId?.message}
+                >
+                  <Select
+                    id="areaId"
+                    placeholder={
+                      !selectedDistrictId
+                        ? "Select District first"
+                        : isAreaLoading
+                          ? "Loading areas..."
+                          : "Select Area"
+                    }
+                    className="h-field border-[1.5px] border-ink-300 px-field-px py-field-py"
+                    onChange={(e) => field.onChange(e.target.value)}
+                    value={field.value}
+                    options={areaOptions}
+                    disabled={!selectedDistrictId || isAreaLoading}
+                  />
+                </FormField>
+              );
+            }}
+          />
+
+          <FormField
             label="Code"
-            placeholder="MUN-001"
-            registration={register}
-            name="code"
-          />
-          <Field
+            labelSuffix="(Unique Identifier)"
+            errorText={errors.code?.message}
+          >
+            <Input
+              id="code"
+              {...register("code")}
+              placeholder="e.g., Ward 4 Infrastructure Survey"
+              className="h-field border-[1.5px] border-ink-300 px-field-px py-field-py"
+            />
+          </FormField>
+
+          <FormField
             label="Municipality Name (EN)"
-            placeholder="Kathmandu Metropolitan City"
-            registration={register}
-            name="nameEn"
-          />
-          <Field
+            errorText={errors.nameEn?.message}
+          >
+            <Input
+              {...register("nameEn")}
+              placeholder="Kathmandu Metropolitan City"
+            />
+          </FormField>
+          <FormField
             label="नगरपालिकाको नाम (NE)"
-            placeholder="काठमाडौँ महानगरपालिका"
-            registration={register}
-            name="nameNe"
-          />
-          <Field
+            errorText={errors.nameNe?.message}
+          >
+            <Input
+              {...register("nameNe")}
+              placeholder="काठमाडौँ महानगरपालिका"
+            />
+          </FormField>
+          <FormField
             label="Mayor / Chief (EN)"
-            placeholder="Executive Head Name"
-            registration={register}
-            name="headExecutiveNameEn"
-          />
-          <Field
+            errorText={errors.headExecutiveNameEn?.message}
+          >
+            <Input
+              {...register("headExecutiveNameEn")}
+              placeholder="Executive Head Name"
+            />
+          </FormField>
+          <FormField
             label="प्रमुखको नाम (NE)"
-            placeholder="पूरा नाम नेपालीमा"
-            registration={register}
-            name="headExecutiveNameNe"
-          />
-          <Field
-            label="Email Address"
-            placeholder="info@municipality.gov.np"
-            registration={register}
-            name="email"
-          />
-          <Field
-            label="Phone Number"
-            placeholder="+977-XX-XXXXXXX"
-            registration={register}
-            name="phoneNo"
-          />
-          <Field
+            errorText={errors.headExecutiveNameNe?.message}
+          >
+            <Input
+              {...register("headExecutiveNameNe")}
+              placeholder="पूरा नाम नेपालीमा"
+            />
+          </FormField>
+          <FormField label="Email Address" errorText={errors.email?.message}>
+            <Input
+              {...register("email")}
+              placeholder="info@municipality.gov.np"
+            />
+          </FormField>
+          <FormField label="Phone Number" errorText={errors.phoneNo?.message}>
+            <Input {...register("phoneNo")} placeholder="+977-XX-XXXXXXX" />
+          </FormField>
+          <FormField
             className="col-span-2"
             label="Website"
-            placeholder="https://www.municipality.gov.np"
-            registration={register}
-            name="website"
-          />
+            errorText={errors.website?.message}
+          >
+            <Input
+              {...register("website")}
+              placeholder="https://www.municipality.gov.np"
+            />
+          </FormField>
         </div>
 
-        <footer className="flex flex-wrap items-center justify-end gap-4 border-t border-(--mis-color-ink-200) px-8 py-8 md:px-10">
-          <button
-            type="button"
+        <footer className="flex items-center justify-between border-t border-gray-200 pt-8">
+          <Button
+            variant="ghost"
             onClick={handleDismiss}
-            className={cn(actionButtonVariants({ variant: "ghost" }))}
+            className="text-ink-500 hover:bg-ink-100 min-w-60"
           >
-            Dismiss
-          </button>
-          <button
+            Cancel
+          </Button>
+          <Button
             type="submit"
+            variant="primary"
             disabled={createMunicipalityMutation.isPending}
-            className={cn(
-              actionButtonVariants({ variant: "primary" }),
-              "min-w-60 disabled:cursor-not-allowed disabled:opacity-70",
-            )}
+            className="min-w-60 disabled:cursor-not-allowed disabled:opacity-70"
           >
             <Save className="h-4 w-4" />
             {createMunicipalityMutation.isPending
               ? "Saving..."
               : "Confirm Registry"}
-          </button>
+          </Button>
         </footer>
       </form>
-    </section>
+    </Modal>
   );
 }
 

@@ -14,13 +14,8 @@ export const getMunicipalities = async (): Promise<Municipality[]> => {
 export const createMunicipality = async (
   data: Omit<Municipality, "id">,
 ): Promise<Municipality> => {
-  try {
-    const response = await http.post("/municipality", data);
-    return response.data;
-  } catch (error) {
-    console.error("Error creating municipality:", error);
-    throw error;
-  }
+  const response = await http.post("/municipality", data);
+  return response.data;
 };
 
 export const updateMunicipality = async (

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const municipalitySchema = z.object({
   id: z.guid(),
-
+  areaId: z.guid(),
   nameNe: z.string().max(100),
   nameEn: z.string().max(100),
   code: z.string().max(10),
@@ -14,6 +14,10 @@ export const municipalitySchema = z.object({
 });
 
 export type Municipality = z.infer<typeof municipalitySchema>;
+
+export const createMunicipalitySchema = municipalitySchema.omit({ id: true });
+
+export type CreateMunicipality = z.infer<typeof createMunicipalitySchema>;
 
 export const municipalitySeedResponseSchema = z.object({
   message: z.string().optional(),

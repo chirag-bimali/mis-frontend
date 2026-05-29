@@ -11,15 +11,8 @@ const mockSummaryDb: MasterSetupSummary = {
   updatedAt: new Date().toISOString(),
 };
 
-const sleep = (ms: number) =>
-  new Promise<void>((resolve) => {
-    setTimeout(resolve, ms);
-  });
-
 export const masterSetupApi = {
   getSummary: async () => {
-    // Mock backend roundtrip until the real endpoint is available.
-    await sleep(500);
     return structuredClone(mockSummaryDb);
   },
 };

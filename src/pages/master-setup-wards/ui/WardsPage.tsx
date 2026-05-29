@@ -123,7 +123,7 @@ export function MasterSetupWardsPage() {
           </button>
 
           {isMunicipalityDropdownOpen && (
-            <div className="absolute z-20 mt-2 w-full rounded-xl border border-(--mis-color-ink-300) bg-(--mis-color-white) p-3 shadow-(--mis-shadow-lg)">
+            <div className="absolute z-20 mt-2 w-full rounded-xl border border-(--mis-color-ink-300) bg-(--mis-color-white) p-3 shadow-lg">
               <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-(--mis-color-ink-500)" />
                 <input

@@ -37,6 +37,8 @@ dist-ssr
 # Auto generated
 **/*.gen.ts
 .tanstack
+graphify-out/
+docs
 
 # Dummy files
 temp/

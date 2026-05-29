@@ -10,6 +10,7 @@ import {
   importMunicipalitySeed,
 } from "./municipalities.api";
 import type { Municipality, MunicipalitySeedResponse } from "../model";
+import type { ApiResponse } from "@shared/model";
 
 // 1. Hook to Fetch all Municipalities
 export const useMunicipalities = () => {
@@ -21,15 +22,15 @@ export const useMunicipalities = () => {
 
 // 2. Hook to Create a Municipality
 export const useCreateMunicipality = () => {
-  return useMutation<Municipality, unknown, Omit<Municipality, "id">>({
+  return useMutation<
+    Municipality,
+    ApiResponse<object>,
+    Omit<Municipality, "id">
+  >({
     mutationFn: (data: Omit<Municipality, "id">) => createMunicipality(data),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: municipalitiesKeys.list() });
-    },
-    onError: (error) => {
-      // You can handle global error notifications here
-      console.error("Mutation failed:", error);
     },
   });
 };

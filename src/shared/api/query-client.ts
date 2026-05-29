@@ -1,16 +1,16 @@
 import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
-import type { ApiError } from "./http";
+import type { ApiResponse } from "@shared/model";
 
 const shouldRetry = (failureCount: number, error: unknown) => {
   if (failureCount >= 2) return false;
-  const apiError = error as ApiError;
+  const response = error as ApiResponse<object>;
 
-  if (apiError?.status) return false;
+  if (response?.statusCode) return false;
 
   if (
-    apiError?.status >= 400 &&
-    apiError?.status < 500 &&
-    apiError?.status !== 429
+    response?.statusCode >= 400 &&
+    response?.statusCode < 500 &&
+    response?.statusCode !== 429
   )
     return false;
   return true;
@@ -41,15 +41,5 @@ export const queryClient = new QueryClient({
     },
   }),
   // 3. Global Error Handling for Mutations (POST/PUT/DELETE requests)
-  mutationCache: new MutationCache({
-    onError: (error, _variables, _context, mutation) => {
-      if (mutation.meta?.errorMessage) {
-        console.error(`Mutation Error: ${mutation.meta.errorMessage}`);
-        // toast.error(mutation.meta.errorMessage as string);
-      } else {
-        console.error("Action failed:", error);
-        // toast.error('Action failed. Please try again.');
-      }
-    },
-  }),
+  mutationCache: new MutationCache({}),
 });
