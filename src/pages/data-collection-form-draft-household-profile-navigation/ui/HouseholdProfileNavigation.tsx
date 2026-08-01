@@ -15,7 +15,7 @@ export default function HouseholdProfileNavigation() {
   const removeNode = useCaseTreeStore((s) => s.removeNode);
 
   if (!activeCaseId) {
-    throw redirect({ to: "/data-collection/forms/drafts" });
+    throw redirect({ to: "/data-collection/drafts" });
   }
 
   const nodesById = useCaseTreeStore(

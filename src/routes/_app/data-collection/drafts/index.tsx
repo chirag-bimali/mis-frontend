@@ -1,7 +1,7 @@
 import DraftsTable from "@pages/data-collection-form-drafts/ui/DraftsTable";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_app/data-collection/forms/drafts/")({
+export const Route = createFileRoute("/_app/data-collection/drafts/")({
   beforeLoad: () => ({
     breadcrumb: "Drafts",
   }),

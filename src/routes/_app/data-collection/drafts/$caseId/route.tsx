@@ -7,7 +7,7 @@ import Forms from "@pages/data-collection-form-draft-navigation/ui/Forms";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/_app/data-collection/forms/drafts/$caseId",
+  "/_app/data-collection/drafts/$caseId",
 )({
   component: RouteComponent,
   beforeLoad: async ({ params }) => {

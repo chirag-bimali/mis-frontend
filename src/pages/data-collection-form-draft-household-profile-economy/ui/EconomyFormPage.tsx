@@ -19,7 +19,7 @@ import LoanToggle from "./LoanToggle";
 export default function EconomyFormPage() {
   const navigate = useNavigate();
   const { caseId, householdId } = useParams({
-    from: "/_app/data-collection/forms/drafts/$caseId/household-profile/$householdId/economic",
+    from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/economic",
   });
 
 
@@ -56,14 +56,14 @@ export default function EconomyFormPage() {
 
   const goPrevious = () => {
     navigate({
-      to: "/data-collection/forms/drafts/$caseId/household-profile/$householdId/residence",
+      to: "/data-collection/drafts/$caseId/household-profile/$householdId/residence",
       params: { caseId, householdId },
     });
   };
 
   const goNext = () => {
     navigate({
-      to: "/data-collection/forms/drafts/$caseId/household-profile/$householdId/facilities",
+      to: "/data-collection/drafts/$caseId/household-profile/$householdId/facilities",
       params: { caseId, householdId },
     });
   };

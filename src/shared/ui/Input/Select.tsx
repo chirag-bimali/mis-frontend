@@ -10,7 +10,7 @@ export type SelectOption = {
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   hasError?: boolean;
-  options?: Array<string | SelectOption>;
+  options?: SelectOption[];
   placeholder?: string;
 }
 

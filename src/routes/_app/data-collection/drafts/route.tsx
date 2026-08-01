@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_app/data-collection/forms/drafts")({
+export const Route = createFileRoute("/_app/data-collection/drafts")({
   beforeLoad: () => ({
     breadcrumb: "Drafts",
   }),

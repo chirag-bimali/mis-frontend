@@ -4,7 +4,7 @@ import ResidenceFormPage from "@pages/data-collection-form-draft-household-profi
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/_app/data-collection/forms/drafts/$caseId/household-profile/$householdId/residence",
+  "/_app/data-collection/drafts/$caseId/household-profile/$householdId/residence",
 )({
   beforeLoad: async ({ params }) => {
     const { caseId, householdId } = params;
@@ -20,7 +20,7 @@ export const Route = createFileRoute(
       !householdProfileNode.childrenIds.includes(householdId)
     ) {
       throw redirect({
-        to: "/data-collection/forms/drafts/$caseId/household-profile",
+        to: "/data-collection/drafts/$caseId/household-profile",
         params: { caseId },
       });
     }

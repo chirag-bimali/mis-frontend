@@ -39,6 +39,8 @@ dist-ssr
 .tanstack
 graphify-out/
 docs
+.claude/
+.venv/
 
 # Dummy files
 temp/

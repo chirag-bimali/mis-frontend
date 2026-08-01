@@ -4,7 +4,7 @@ import { HouseholdFormNavigation } from "@pages/data-collection-form-draft-house
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/_app/data-collection/forms/drafts/$caseId/household-profile/",
+  "/_app/data-collection/drafts/$caseId/household-profile/",
 )({
   beforeLoad: ({ params }) => {
     const { caseId } = params;

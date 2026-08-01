@@ -22,7 +22,7 @@ export default function ResidenceFormPage() {
   const getCachedDraftValues = useFormDraftStore((s) => s.getCachedDraftValues);
 
   const { caseId, householdId } = useParams({
-    from: "/_app/data-collection/forms/drafts/$caseId/household-profile/$householdId/residence",
+    from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/residence",
   });
 
   const { data: ownershipStatusOptions } =

@@ -92,7 +92,7 @@ export default function DraftsTable() {
                     // If the click is on a button or link, do not navigate
                     return;
                   }
-                  navigate({ to: `/data-collection/forms/drafts/${draft.id}` });
+                  navigate({ to: `/data-collection/drafts/$caseId`, params: { caseId: draft.id } });
                 }}
               >
                 <td className="px-4 pl-6 py-3.5">

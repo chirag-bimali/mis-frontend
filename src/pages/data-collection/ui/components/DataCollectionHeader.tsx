@@ -19,7 +19,7 @@ export default function DataCollectionHeader() {
           <ButtonLink
             variant="ghost"
             size="sm"
-            to="/data-collection/forms/drafts"
+            to="/data-collection/drafts"
           >
             <span>See drafts</span>
             <span>
