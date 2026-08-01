@@ -1,23 +1,24 @@
-import type { EconomyOption, ExpenditureField } from "./types";
+import type { SelectOption } from "@shared/ui/Input/Select";
+import type { ExpenditureField } from "./types";
 
-export const CLASSIFICATION_OPTIONS: EconomyOption[] = [
-  { label: "Rich (धनी)", value: "rich" },
-  { label: "Medium (मध्यम)", value: "medium" },
-  { label: "Poor (गरिब)", value: "poor" },
-  { label: "Very Poor (अति गरिब)", value: "very_poor" },
+export const CLASSIFICATION_OPTIONS: SelectOption[] = [
+  { labelEn: "Rich", labelNe: "धनी", value: "rich" },
+  { labelEn: "Medium", labelNe: "मध्यम", value: "medium" },
+  { labelEn: "Poor", labelNe: "गरिब", value: "poor" },
+  { labelEn: "Very Poor", labelNe: "अति गरिब", value: "very_poor" },
 ];
 
-export const INCOME_SOURCE_OPTIONS: EconomyOption[] = [
-  { label: "Agriculture (कृषि)", value: "agriculture" },
-  { label: "Employment (रोजगारी)", value: "employment" },
-  { label: "Business (व्यापार)", value: "business" },
-  { label: "Remittance (रेमिट्यान्स)", value: "remittance" },
+export const INCOME_SOURCE_OPTIONS: SelectOption[] = [
+  { labelEn: "Agriculture", labelNe: "कृषि", value: "agriculture" },
+  { labelEn: "Employment", labelNe: "रोजगारी", value: "employment" },
+  { labelEn: "Business", labelNe: "व्यापार", value: "business" },
+  { labelEn: "Remittance", labelNe: "रेमिट्यान्स", value: "remittance" },
 ];
 
-export const LOAN_SOURCE_OPTIONS: EconomyOption[] = [
-  { label: "Bank (बैंक)", value: "bank" },
-  { label: "Cooperative (सहकारी)", value: "cooperative" },
-  { label: "Personal (व्यक्तिगत)", value: "personal" },
+export const LOAN_SOURCE_OPTIONS: SelectOption[] = [
+  { labelEn: "Bank", labelNe: "बैंक", value: "bank" },
+  { labelEn: "Cooperative", labelNe: "सहकारी", value: "cooperative" },
+  { labelEn: "Personal", labelNe: "व्यक्तिगत", value: "personal" },
 ];
 
 export const EXPENDITURE_FIELDS: ExpenditureField[] = [
