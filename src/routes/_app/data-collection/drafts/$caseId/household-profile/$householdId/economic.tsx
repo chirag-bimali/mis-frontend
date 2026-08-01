@@ -1,4 +1,4 @@
-import EconomyFormPage from "@pages/data-collection-form-draft-household-profile-economy";
+import EconomyFormPage from "@pages/data-collection/drafts/household-profile/economy";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(

@@ -1,4 +1,4 @@
-import { HouseholdFormNavigation } from "@pages/data-collection-form-draft-household-profile-navigation";
+import { HouseholdFormNavigation } from "@pages/data-collection/drafts/household-profile/navigation";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute(

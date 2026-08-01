@@ -1,4 +1,4 @@
-import FacilityPage from "@pages/data-collection-form-draft-household-profile-facility";
+import FacilityPage from "@pages/data-collection/drafts/household-profile/facility";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(

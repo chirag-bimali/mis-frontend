@@ -10,7 +10,7 @@ export const FAMILY_SECTIONS: FamilySection[] = [
   {
     id: "member-details",
     label: "Member Details",
-    link: "/data-collection/drafts/$caseId/household-profile/$householdId/member-details",
+    link: "/data-collection/drafts/$caseId/household-profile/$householdId/member",
   },
   {
     id: "social-cultural",

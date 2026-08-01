@@ -1,4 +1,4 @@
-import DraftsTable from "@pages/data-collection-form-drafts/ui/DraftsTable";
+import DraftsTable from "@pages/data-collection/drafts/index";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app/data-collection/drafts/")({

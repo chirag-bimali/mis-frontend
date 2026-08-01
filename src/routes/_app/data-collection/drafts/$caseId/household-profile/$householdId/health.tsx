@@ -1,4 +1,4 @@
-import HealthForm from "@pages/data-collection-form-draft-household-profile-health";
+import HealthForm from "@pages/data-collection/drafts/household-profile/health";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(

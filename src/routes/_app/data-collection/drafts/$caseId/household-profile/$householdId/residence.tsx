@@ -1,6 +1,6 @@
 import { useCaseTreeStore, useFormDraftStore } from "@entities/case";
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_RESIDENCE_KEY } from "@entities/case/model/keys";
-import ResidenceFormPage from "@pages/data-collection-form-draft-household-profile-residence";
+import ResidenceFormPage from "@pages/data-collection/drafts/household-profile/residence";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute(

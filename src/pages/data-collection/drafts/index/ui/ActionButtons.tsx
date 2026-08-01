@@ -22,7 +22,7 @@ export default function ActionButtons({
         <Trash2 className="h-3.5 w-3.5" />
       </Button>
       <ButtonLink
-        to="/data-collection/drafts/$caseId"
+        to="/data-collection/drafts/$caseId/house-profile"
         params={{ caseId: draftId }}
         variant={"ghost"}
         size={"sm"}

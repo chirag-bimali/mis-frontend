@@ -4,7 +4,7 @@ export const Route = createFileRoute(
   "/_app/data-collection/drafts/$caseId/institute-profile/",
 )({
   beforeLoad: ({ params }) => ({
-    breadcrumb: `Institute Profile - ${params.surveyId}`,
+    breadcrumb: `Institute Profile - ${params.caseId}`,
   }),
   component: RouteComponent,
 });
