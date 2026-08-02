@@ -1,4 +1,4 @@
-import { Input } from "@shared/ui/Input";
+import { Input } from "@shared/ui/Inputs/Input";
 import { ArrowRight, Search } from "lucide-react";
 import { ButtonLink } from "@shared/ui/ButtonLink";
 

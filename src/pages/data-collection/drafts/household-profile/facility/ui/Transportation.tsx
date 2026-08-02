@@ -1,5 +1,5 @@
 import cn from "@shared/lib/cn";
-import type { SelectOption } from "@shared/ui/Input/Select";
+import type { SelectOption } from "@shared/ui/Inputs/Select";
 import { Check } from "lucide-react";
 
 type Props = {
@@ -9,7 +9,12 @@ type Props = {
   error?: string | null;
 };
 
-export default function Transportation({ options, value, onChange, error }: Props) {
+export default function Transportation({
+  options,
+  value,
+  onChange,
+  error,
+}: Props) {
   const toggle = (v: string, checked: boolean) => {
     if (checked) onChange([...value, v]);
     else onChange(value.filter((x) => x !== v));

@@ -10,11 +10,12 @@ import {
   type CreateMunicipality,
   type Municipality,
 } from "../model";
-import { FormField } from "@shared/ui/Input/FormField";
-import { Input, Select } from "@shared/ui/Input";
-import SearchSelect from "@shared/ui/Input/SearchSelect";
-import { useSearchDistricts } from "../../../entities/district/hooks/district.query";
-import { useAreasByDistrict } from "../../../entities/area/hooks/area.query";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Input } from "@shared/ui/Inputs/Input";
+import { Select } from "@shared/ui/Inputs/Select";
+import { SearchSelect } from "@shared/ui/Inputs/SearchSelect";
+import { useSearchDistricts } from "@entities/district/hooks/district.query";
+import { useAreasByDistrict } from "@entities/area/hooks/area.query";
 import { Modal } from "@shared/ui/Modal";
 import { Button } from "@shared/ui/Button";
 import { mapServerErrors } from "@shared/util/mapServerErrors";
@@ -65,8 +66,7 @@ export function MunicipalityAddForm({
     () =>
       districtSearchResults.map((d) => ({
         labelEn: d.nameEn,
-        value: d.id!,
-        id: d.id!,
+        value: d.id,
         labelNe: d.nameNe,
       })),
     [districtSearchResults],
@@ -156,7 +156,7 @@ export function MunicipalityAddForm({
                 setValue("areaId", "");
               }}
               onSelect={(opt) => {
-                setSelectedDistrictId(opt.id);
+                setSelectedDistrictId(opt.value);
                 setValue("areaId", "");
               }}
               selectedKey={selectedDistrictId || ""}

@@ -1,6 +1,6 @@
 import cn from "@shared/lib";
 import { Button } from "@shared/ui/Button";
-import { FormField } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
 import type { LoanToggleProps } from "../model";
 
 export default function LoanToggle({ value, onChange }: LoanToggleProps) {

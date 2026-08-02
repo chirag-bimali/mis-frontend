@@ -113,7 +113,7 @@ export function WardEditForm({
     <section
       className={cn("min-h-screen h-dvh overflow-hidden p-5 md:p-8", className)}
     >
-      <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-3xl border border-(--mis-color-ink-200) bg-(--mis-color-white) shadow-(--mis-shadow-lg)">
+      <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-3xl border border-(--mis-color-ink-200) bg-(--mis-color-white) shadow-lg">
         <header className="flex items-start justify-between border-b border-(--mis-color-ink-200) px-8 py-8 md:px-10">
           <div className="flex items-center gap-4">
             <div className="grid h-12 w-12 place-items-center rounded-xl border border-(--mis-color-pri-500) bg-(--mis-color-pri-50) text-(--mis-color-pri-600)">

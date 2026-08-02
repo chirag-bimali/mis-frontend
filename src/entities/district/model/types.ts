@@ -17,7 +17,7 @@ export type DistrictSearchOptions = {
 };
 
 export const DistrictSchema = z.object({
-  id: z.guid().optional(),
+  id: z.guid(),
   provinceId: z.guid(),
   code: z.string().min(1),
   nameEn: z.string().min(1),

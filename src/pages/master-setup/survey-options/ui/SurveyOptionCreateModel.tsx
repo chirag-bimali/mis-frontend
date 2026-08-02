@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui/Button";
-import { FormField, Input, Textarea } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Textarea } from "@shared/ui/Inputs/Textarea";
+import { Input } from "@shared/ui/Inputs/Input";
 import { Modal } from "@shared/ui/Modal";
 import {
   createOptionListSchema,

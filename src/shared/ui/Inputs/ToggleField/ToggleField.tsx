@@ -1,6 +1,6 @@
 import type { ToggleOptions } from "@shared/model/toggle";
 import cn from "@shared/lib/cn";
-import { Input2 } from "./Input2";
+import { Input } from "./Input";
 
 type ToggleFieldProps = {
   label?: string;
@@ -54,7 +54,7 @@ export default function ToggleField({
                 : "font-medium text-ink-500 hover:text-ink-900",
             )}
           >
-            <Input2
+            <Input
               type="radio"
               name={name}
               id={option.id}

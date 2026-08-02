@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { CircleDollarSign } from "lucide-react";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { FormField, Select } from "@shared/ui/Input";
+import { Select } from "@shared/ui/Inputs/Select";
+import { FormField } from "@shared/ui/Inputs/FormField";
 import {
   CLASSIFICATION_OPTIONS,
   EXPENDITURE_FIELDS,
@@ -21,7 +22,6 @@ export default function EconomyFormPage() {
   const { caseId, householdId } = useParams({
     from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/economic",
   });
-
 
   const [classification, setClassification] = useState("");
   const [incomeSource, setIncomeSource] = useState("");

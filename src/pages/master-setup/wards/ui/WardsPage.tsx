@@ -390,7 +390,7 @@ export function MasterSetupWardsPage() {
               </button>
               <button
                 type="button"
-                className="grid h-10 min-w-10 place-items-center rounded-md bg-(--mis-color-pri-500) px-3 text-white shadow-(--mis-shadow-focus)"
+                className="grid h-10 min-w-10 place-items-center rounded-md bg-(--mis-color-pri-500) px-3 text-white shadow-focus"
               >
                 1
               </button>

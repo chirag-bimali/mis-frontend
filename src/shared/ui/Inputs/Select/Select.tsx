@@ -1,12 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { type SelectHTMLAttributes, forwardRef } from "react";
 import cn from "@shared/lib";
-
-export type SelectOption = {
-  labelEn: string;
-  labelNe?: string;
-  value: string;
-};
+import type { SelectOption } from "./types";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   hasError?: boolean;

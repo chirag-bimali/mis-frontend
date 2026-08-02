@@ -63,7 +63,7 @@ export function WardDeleteConfirmBox({
 
   return (
     <section className="min-h-screen h-dvh overflow-hidden bg-transparent p-0">
-      <div className="mx-auto mt-[18vh] w-full max-w-xl overflow-hidden rounded-3xl border border-(--mis-color-ink-200) bg-(--mis-color-white) shadow-(--mis-shadow-lg)">
+      <div className="mx-auto mt-[18vh] w-full max-w-xl overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-lg">
         <header className="flex items-start justify-between border-b border-(--mis-color-ink-200) px-8 py-7 md:px-10">
           <div className="flex items-center gap-4">
             <div className="grid h-12 w-12 place-items-center rounded-xl border border-(--mis-color-error-500) bg-(--mis-color-error-50) text-(--mis-color-error-600)">

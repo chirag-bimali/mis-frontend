@@ -1,5 +1,6 @@
 import { Home } from "lucide-react";
-import { FormField, Select } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Select } from "@shared/ui/Inputs/Select";
 import {
   DISTRICT_OPTIONS,
   REASON_FOR_MIGRATION_OPTIONS,
@@ -13,7 +14,8 @@ import { useFormDraftStore } from "@entities/case";
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_RESIDENCE_KEY } from "@entities/case/model/keys";
 import { useEffect } from "react";
 import { useOptionItemByOptionListKey } from "@entities/option/hooks/option-item.query";
-import optionItemToSelectOption from "@shared/lib/optionItemToSelectOption";
+import { optionItemToSelectOption } from "@entities/option/helpers/optionItemToSelectOption";
+// import optionItemToSelectOption from "@shared/lib/optionItemToSelectOption";
 
 export default function ResidenceFormPage() {
   const navigate = useNavigate();
@@ -124,8 +126,8 @@ export default function ResidenceFormPage() {
                 render={({ field }) => (
                   <Select
                     placeholder="Select ownership"
-                    options={ownershipStatusOptions?.map(
-                      optionItemToSelectOption,
+                    options={ownershipStatusOptions?.map((option) =>
+                      optionItemToSelectOption(option),
                     )}
                     value={field.value}
                     onChange={(v) => field.onChange(v)}

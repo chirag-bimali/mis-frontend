@@ -1,9 +1,10 @@
-import { FormField, Select } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Select } from "@shared/ui/Inputs/Select";
 import Section from "./Section";
 import { useOptionItemByOptionListKey } from "@entities/option";
 import Footer from "./Footer";
 import Amenties from "./Amenties";
-import optionItemToSelectOption from "@shared/lib/optionItemToSelectOption";
+import { optionItemToSelectOption } from "@entities/option";
 import Transportation from "./Transportation";
 import { Controller, useForm } from "react-hook-form";
 import { FacilitySchema, type Facility } from "../model";

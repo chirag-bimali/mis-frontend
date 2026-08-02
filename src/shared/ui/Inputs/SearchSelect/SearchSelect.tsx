@@ -1,9 +1,9 @@
 import { Search, X } from "lucide-react";
 import cn from "@shared/lib";
-import { Input } from "@shared/ui/Input";
-import type { OptionItem } from "@shared/model";
-import { Button } from "../Button";
+import { Input } from "@shared/ui/Inputs/Input";
+import { Button } from "@shared/ui/Button";
 import { useState } from "react";
+import type { SelectOption } from "./types";
 
 type SearchSelectProps = {
   searchValue: string;
@@ -11,7 +11,7 @@ type SearchSelectProps = {
   onSearchFocus?: () => void;
   onReset?: () => void;
 
-  options: OptionItem[];
+  options: SelectOption[];
 
   loading?: boolean;
   loadingMessage?: string;
@@ -20,7 +20,7 @@ type SearchSelectProps = {
   errorMessage?: string;
 
   selectedKey?: string;
-  onSelect?: (opt: OptionItem) => void;
+  onSelect?: (opt: SelectOption) => void;
 
   placeholder?: string;
 
@@ -30,7 +30,7 @@ type SearchSelectProps = {
   className?: string;
 };
 
-function SearchSelect({
+export const SearchSelect = ({
   searchValue,
   onSearchValueChange,
   onSearchFocus,
@@ -46,9 +46,9 @@ function SearchSelect({
   errorMessage = "Unable to fetch.",
   noResultsMessage = "No results found.",
   className,
-}: SearchSelectProps) {
+}: SearchSelectProps) => {
   const [focused, setFocused] = useState(false);
-  const onSelected = (opt: OptionItem) => {
+  const onSelected = (opt: SelectOption) => {
     onSearchValueChange(opt.labelEn);
     onSelect?.(opt);
   };
@@ -119,7 +119,7 @@ function SearchSelect({
             return (
               <button
                 type="button"
-                key={opt.id ?? opt.value}
+                key={opt.value}
                 className="w-full px-field-px py-field-py text-left text-sm hover:bg-ink-50 cursor-pointer"
                 onPointerDown={(e) => {
                   e.preventDefault();
@@ -139,5 +139,5 @@ function SearchSelect({
       </div>
     </div>
   );
-}
+};
 export default SearchSelect; // ✅ won't re-render unless props actually change

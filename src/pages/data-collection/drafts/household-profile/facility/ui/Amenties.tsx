@@ -1,5 +1,5 @@
 import cn from "@shared/lib/cn";
-import type { SelectOption } from "@shared/ui/Input/Select";
+import type { SelectOption } from "@shared/ui/Inputs/Select";
 import { Check } from "lucide-react";
 
 type Props = {

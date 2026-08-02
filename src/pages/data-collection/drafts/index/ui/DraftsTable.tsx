@@ -1,7 +1,7 @@
 import { useCaseDraftStore, useCaseTreeStore } from "@entities/case";
 import ActionButtons from "./ActionButtons";
 import { formatDate } from "../lib/date";
-import { Input } from "@shared/ui/Input/Input";
+import { Input } from "@shared/ui/Inputs/Input";
 import { Button } from "@shared/ui/Button/Button";
 import NewSurveyModal from "./NewSurveyDraftModel";
 import { useMemo, useState } from "react";

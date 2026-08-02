@@ -4,9 +4,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui/Button";
-import { FormField, Input } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Input } from "@shared/ui/Inputs/Input";
 import { Modal } from "@shared/ui/Modal";
-import { updateOptionItemSchema, useUpdateOptionItem, type OptionItem, type UpdateOptionItem } from "@entities/option";
+import {
+  updateOptionItemSchema,
+  useUpdateOptionItem,
+  type OptionItem,
+  type UpdateOptionItem,
+} from "@entities/option";
 
 // import { useUpdateOptionItem } from "../api";
 // import type { OptionItem } from "../model";
@@ -20,134 +26,131 @@ import { updateOptionItemSchema, useUpdateOptionItem, type OptionItem, type Upda
 // type UpdateOptionItemFormData = z.infer<typeof updateOptionItemFormSchema>;
 
 interface SurveyOptionItemEditModalProps {
-	isOpen: boolean;
-	optionItem?: OptionItem;
-	optionListName?: string;
-	onClose: () => void;
-	onSave: (item: OptionItem) => void | Promise<void>;
+  isOpen: boolean;
+  optionItem?: OptionItem;
+  optionListName?: string;
+  onClose: () => void;
+  onSave: (item: OptionItem) => void | Promise<void>;
 }
 
 export function SurveyOptionItemEditModal({
-	isOpen,
-	optionItem,
-	optionListName,
-	onClose,
-	onSave,
+  isOpen,
+  optionItem,
+  optionListName,
+  onClose,
+  onSave,
 }: SurveyOptionItemEditModalProps) {
-	const [apiError, setApiError] = useState<string | null>(null);
-	const { mutateAsync: updateOptionItemAsync } = useUpdateOptionItem();
+  const [apiError, setApiError] = useState<string | null>(null);
+  const { mutateAsync: updateOptionItemAsync } = useUpdateOptionItem();
 
-	const {
-		register,
-		handleSubmit,
-		formState: { isSubmitting },
-	} = useForm<UpdateOptionItem>({
-		resolver: zodResolver(updateOptionItemSchema),
-		defaultValues: {
-			labelEn: optionItem?.labelEn ?? "",
-			labelNe: optionItem?.labelNe ?? "",
-		},
-		values: {
-			labelEn: optionItem?.labelEn ?? "",
-			labelNe: optionItem?.labelNe ?? "",
-		},
-	});
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<UpdateOptionItem>({
+    resolver: zodResolver(updateOptionItemSchema),
+    defaultValues: {
+      labelEn: optionItem?.labelEn ?? "",
+      labelNe: optionItem?.labelNe ?? "",
+    },
+    values: {
+      labelEn: optionItem?.labelEn ?? "",
+      labelNe: optionItem?.labelNe ?? "",
+    },
+  });
 
-	if (!isOpen) {
-		return null;
-	}
+  if (!isOpen) {
+    return null;
+  }
 
-	const normalizedItemId = optionItem?.id?.trim() ?? "";
+  const normalizedItemId = optionItem?.id?.trim() ?? "";
 
-	const handleClose = () => {
-		if (isSubmitting) {
-			return;
-		}
+  const handleClose = () => {
+    if (isSubmitting) {
+      return;
+    }
 
-		setApiError(null);
-		onClose();
-	};
+    setApiError(null);
+    onClose();
+  };
 
-	const handleSave = async (data: UpdateOptionItem) => {
-		if (normalizedItemId.length === 0) {
-			return;
-		}
+  const handleSave = async (data: UpdateOptionItem) => {
+    if (normalizedItemId.length === 0) {
+      return;
+    }
 
-		const payload = {
-			labelEn: (data.labelEn ?? "").trim(),
-			labelNe: (data.labelNe ?? "").trim(),
-		};
+    const payload = {
+      labelEn: (data.labelEn ?? "").trim(),
+      labelNe: (data.labelNe ?? "").trim(),
+    };
 
-		setApiError(null);
+    setApiError(null);
 
-		try {
-			const updatedItem = await updateOptionItemAsync({
-				id: normalizedItemId,
-				data: payload,
-			});
+    try {
+      const updatedItem = await updateOptionItemAsync({
+        id: normalizedItemId,
+        data: payload,
+      });
 
-			await onSave(updatedItem);
-			onClose();
-		} catch (error) {
-			const apiErrorObj = error as ApiError;
-			setApiError(apiErrorObj.message || "Failed to update option item.");
-			console.error("Error updating option item:", error);
-		}
-	};
+      await onSave(updatedItem);
+      onClose();
+    } catch (error) {
+      const apiErrorObj = error as ApiError;
+      setApiError(apiErrorObj.message || "Failed to update option item.");
+      console.error("Error updating option item:", error);
+    }
+  };
 
-	return (
-		<Modal
-			isOpen={isOpen}
-			title={`Edit ${optionListName ?? "Survey Option Item"}`}
-			description="Update selected option item details."
-			onClose={handleClose}
-			disableClose={isSubmitting}
-		>
-			<form onSubmit={handleSubmit(handleSave)} className="mt-6 space-y-6">
-				<FormField label="Name (EN)" required>
-					<Input
-						{...register("labelEn")}
-						placeholder="Enter English item name"
-					/>
-				</FormField>
+  return (
+    <Modal
+      isOpen={isOpen}
+      title={`Edit ${optionListName ?? "Survey Option Item"}`}
+      description="Update selected option item details."
+      onClose={handleClose}
+      disableClose={isSubmitting}
+    >
+      <form onSubmit={handleSubmit(handleSave)} className="mt-6 space-y-6">
+        <FormField label="Name (EN)" required>
+          <Input
+            {...register("labelEn")}
+            placeholder="Enter English item name"
+          />
+        </FormField>
 
-				<FormField label="Name (NE)" required>
-					<Input
-						{...register("labelNe")}
-						placeholder="Nepali item name"
-					/>
-				</FormField>
+        <FormField label="Name (NE)" required>
+          <Input {...register("labelNe")} placeholder="Nepali item name" />
+        </FormField>
 
-				{!normalizedItemId ? (
-					<p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
-						Select an option item before editing.
-					</p>
-				) : null}
+        {!normalizedItemId ? (
+          <p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
+            Select an option item before editing.
+          </p>
+        ) : null}
 
-				{apiError ? (
-					<p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
-						{apiError}
-					</p>
-				) : null}
+        {apiError ? (
+          <p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
+            {apiError}
+          </p>
+        ) : null}
 
-				<div className="flex flex-wrap justify-end gap-3 border-t border-(--mis-color-ink-200) pt-5">
-					<Button
-						type="button"
-						variant="ghost"
-						onClick={handleClose}
-						disabled={isSubmitting}
-					>
-						Cancel
-					</Button>
-					<Button
-						type="submit"
-						disabled={normalizedItemId.length === 0 || isSubmitting}
-					>
-						<Pencil className="h-4 w-4" />
-						{isSubmitting ? "Updating..." : "Update Option Item"}
-					</Button>
-				</div>
-			</form>
-		</Modal>
-	);
+        <div className="flex flex-wrap justify-end gap-3 border-t border-(--mis-color-ink-200) pt-5">
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={handleClose}
+            disabled={isSubmitting}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={normalizedItemId.length === 0 || isSubmitting}
+          >
+            <Pencil className="h-4 w-4" />
+            {isSubmitting ? "Updating..." : "Update Option Item"}
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  );
 }

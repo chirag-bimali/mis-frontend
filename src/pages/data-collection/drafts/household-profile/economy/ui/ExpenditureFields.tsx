@@ -1,4 +1,5 @@
-import { FormField, Input } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Input } from "@shared/ui/Inputs/Input";
 import type { ExpenditureFieldsProps } from "../model";
 
 export default function ExpenditureFields({

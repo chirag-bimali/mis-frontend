@@ -6,7 +6,9 @@ import { z } from "zod";
 
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui/Button";
-import { FormField, Input, Textarea } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Input } from "@shared/ui/Inputs/Input";
+import { Textarea } from "@shared/ui/Inputs/Textarea";
 import { Modal } from "@shared/ui/Modal";
 import {
   updateOptionListSchema,

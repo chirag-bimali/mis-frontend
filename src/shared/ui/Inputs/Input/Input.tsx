@@ -33,7 +33,7 @@ const inputVariants = cva(
   },
 );
 
-export const Input2 = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, block, ...props }, ref) => {
     return (
       <div className="relative border border-ink-300 rounded-lg">
@@ -54,4 +54,4 @@ export const Input2 = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-Input2.displayName = "Input2";
+Input.displayName = "Input";

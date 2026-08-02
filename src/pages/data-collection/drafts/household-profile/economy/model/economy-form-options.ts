@@ -1,4 +1,4 @@
-import type { SelectOption } from "@shared/ui/Input/Select";
+import type { SelectOption } from "@shared/ui/Inputs/Select";
 import type { ExpenditureField } from "./types";
 
 export const CLASSIFICATION_OPTIONS: SelectOption[] = [

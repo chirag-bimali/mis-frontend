@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Camera, Plus } from "lucide-react";
-import { Input, Select, FormField } from "@shared/ui/Input";
+import { FormField } from "@shared/ui/Inputs/FormField";
+import { Select } from "@shared/ui/Inputs/Select";
+import { Input } from "@shared/ui/Inputs/Input";
 import type { Gender, MemberFormValues } from "../model/types";
 
 type Props = {
@@ -125,7 +127,7 @@ export default function MemberDetailForm({ initialValues }: Props) {
           <Select
             value={gender}
             onChange={(e) => setGender(e.target.value as Gender)}
-            options={["Male (पुरुष)", "Female (महिला)", "Other (अन्य)"]}
+            options={[]}
           />
         </FormField>
 
@@ -141,12 +143,7 @@ export default function MemberDetailForm({ initialValues }: Props) {
           <Select
             value={marital}
             onChange={(e) => setMarital(e.target.value)}
-            options={[
-              "Single (अविवाहित)",
-              "Married (विवाहित)",
-              "Widowed (एकल महिला/पुरुष)",
-              "Divorced (सम्बन्ध विच्छेद भएको)",
-            ]}
+            options={[]}
           />
         </FormField>
 
@@ -162,12 +159,7 @@ export default function MemberDetailForm({ initialValues }: Props) {
           <Select
             value={relationship}
             onChange={(e) => setRelationship(e.target.value)}
-            options={[
-              "Self (आफै)",
-              "Spouse (पति/पत्नी)",
-              "Son/Daughter (छोरा/छोरी)",
-              "Parent (आमा/बुबा)",
-            ]}
+            options={[]}
           />
         </FormField>
 
@@ -183,7 +175,7 @@ export default function MemberDetailForm({ initialValues }: Props) {
           <Select
             value={idType}
             onChange={(e) => setIdType(e.target.value)}
-            options={["Citizenship", "National ID", "Voter Card", "Passport"]}
+            options={[]}
           />
         </FormField>
 
@@ -199,11 +191,7 @@ export default function MemberDetailForm({ initialValues }: Props) {
           <Select
             value={education}
             onChange={(e) => setEducation(e.target.value)}
-            options={[
-              "Master's Degree",
-              "Bachelor's Degree",
-              "Higher Secondary",
-            ]}
+            options={[]}
           />
         </FormField>
 
@@ -219,7 +207,7 @@ export default function MemberDetailForm({ initialValues }: Props) {
           <Select
             value={occupation}
             onChange={(e) => setOccupation(e.target.value)}
-            options={["Government Service", "Private Business", "Agriculture"]}
+            options={[]}
           />
         </FormField>
 

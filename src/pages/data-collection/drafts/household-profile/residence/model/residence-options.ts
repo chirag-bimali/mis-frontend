@@ -1,4 +1,4 @@
-import type { SelectOption } from "@shared/ui/Input/Select";
+import type { SelectOption } from "@shared/ui/Inputs/Select";
 
 // Residence type options (from temp HTML: Residence Type)
 export const RESIDENCE_TYPE_OPTIONS: SelectOption[] = [

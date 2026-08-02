@@ -1,2 +1,3 @@
 export * from "./hooks";
-export * from "./model/types";
+export * from "./model";
+export { optionItemToSelectOption } from "./helpers";
