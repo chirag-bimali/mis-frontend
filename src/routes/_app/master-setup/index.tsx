@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MasterSetupPage } from "@pages/master-setup";
+import { MasterSetupPage } from "@pages/master-setup/index";
 
 function RouteComponent() {
   return <MasterSetupPage />;
