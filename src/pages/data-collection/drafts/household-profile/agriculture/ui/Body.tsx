@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Section from "./Section";
-import ToggleField from "@shared/ui/Inputs/ToggleField";
+import { ToggleField } from "@shared/ui";
 import { List } from "lucide-react";
 
 const stepOneCategories = [

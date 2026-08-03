@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { NotebookPen } from "lucide-react";
-import { Button } from "@shared/ui/Button";
-import { Input } from "@shared/ui/Inputs/Input";
-import { FormField } from "@shared/ui/Inputs/FormField";
+import { Button } from "@shared/ui";
+import { Input } from "@shared/ui";
+import { FormField } from "@shared/ui";
 
 export interface NewHouseholdModalProps {
   isOpen: boolean;

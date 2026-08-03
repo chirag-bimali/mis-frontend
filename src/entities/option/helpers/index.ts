@@ -1,1 +1,0 @@
-export { optionItemToSelectOption } from "./optionItemToSelectOption";

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { NotebookPen } from "lucide-react";
-import { Button } from "@shared/ui/Button";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Input } from "@shared/ui/Inputs/Input";
+import { Button } from "@shared/ui";
+import { FormField } from "@shared/ui";
+import { Input } from "@shared/ui";
 
 export interface NewSurveyModalProps {
   isOpen: boolean;

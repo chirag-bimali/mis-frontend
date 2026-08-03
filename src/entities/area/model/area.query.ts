@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Area } from "../model/types";
+import type { Area } from "./types";
 import { getArea, getAreas, getAreasByDistrict } from "../api";
-import { areaKeys } from "../model/area.key";
+import { areaKeys } from "./area.key";
 
 export const useAreas = () => {
 	return useQuery<Area[]>({

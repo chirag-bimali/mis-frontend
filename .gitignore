@@ -40,6 +40,7 @@ dist-ssr
 graphify-out/
 docs
 .claude/
+CLAUDE.md
 .venv/
 
 # Dummy files

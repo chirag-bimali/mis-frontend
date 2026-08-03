@@ -1,8 +1,8 @@
 import HealthFormFooter from "./HealthFormFooter";
 import { Controller, useForm } from "react-hook-form";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Select } from "@shared/ui/Inputs/Select";
-import ToggleField from "@shared/ui/Inputs/ToggleField";
+import { FormField } from "@shared/ui";
+import { Select } from "@shared/ui";
+import { ToggleField } from "@shared/ui";
 import { useState } from "react";
 import type { Health } from "../model";
 import { ListCheck } from "lucide-react";

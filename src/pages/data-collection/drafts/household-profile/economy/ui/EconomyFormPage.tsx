@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { CircleDollarSign } from "lucide-react";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { Select } from "@shared/ui/Inputs/Select";
-import { FormField } from "@shared/ui/Inputs/FormField";
+import { Select } from "@shared/ui";
+import { FormField } from "@shared/ui";
 import {
   CLASSIFICATION_OPTIONS,
   EXPENDITURE_FIELDS,

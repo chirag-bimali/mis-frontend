@@ -1,8 +1,8 @@
 import { useCaseDraftStore, useCaseTreeStore } from "@entities/case";
 import ActionButtons from "./ActionButtons";
 import { formatDate } from "../lib/date";
-import { Input } from "@shared/ui/Inputs/Input";
-import { Button } from "@shared/ui/Button/Button";
+import { Input } from "@shared/ui";
+import { Button } from "@shared/ui";
 import NewSurveyModal from "./NewSurveyDraftModel";
 import { useMemo, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";

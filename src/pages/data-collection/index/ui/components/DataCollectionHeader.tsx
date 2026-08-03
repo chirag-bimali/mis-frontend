@@ -1,6 +1,6 @@
-import { Input } from "@shared/ui/Inputs/Input";
+import { Input } from "@shared/ui";
 import { ArrowRight, Search } from "lucide-react";
-import { ButtonLink } from "@shared/ui/ButtonLink";
+import { ButtonLink } from "@shared/ui";
 
 export default function DataCollectionHeader() {
   return (

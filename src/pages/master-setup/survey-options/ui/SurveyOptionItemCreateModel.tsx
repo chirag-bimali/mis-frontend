@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
-import { Button } from "@shared/ui/Button";
-import { Input } from "@shared/ui/Inputs/Input";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Modal } from "@shared/ui/Modal";
+import { Button } from "@shared/ui";
+import { Input } from "@shared/ui";
+import { FormField } from "@shared/ui";
+import { Modal } from "@shared/ui";
 import {
   createOptionItemSchema,
   useCreateOptionItem,

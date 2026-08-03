@@ -3,15 +3,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
-import { Button } from "@shared/ui/Button";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Textarea } from "@shared/ui/Inputs/Textarea";
-import { Input } from "@shared/ui/Inputs/Input";
-import { Modal } from "@shared/ui/Modal";
+import { Button } from "@shared/ui";
+import { FormField } from "@shared/ui";
+import { Textarea } from "@shared/ui";
+import { Input } from "@shared/ui";
+import { Modal } from "@shared/ui";
 import {
   createOptionListSchema,
   type CreateOptionList,
-} from "@entities/option/model";
+} from "@entities/option";
 import { useCreateOptionList } from "@entities/option";
 
 interface SurveyOptionCreateModalProps {

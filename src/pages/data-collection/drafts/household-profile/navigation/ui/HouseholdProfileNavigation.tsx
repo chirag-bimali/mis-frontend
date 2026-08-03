@@ -1,11 +1,11 @@
-import { Button } from "@shared/ui/Button";
+import { Button } from "@shared/ui";
 import { Plus } from "lucide-react";
 import { useCaseDraftStore, useCaseTreeStore } from "@entities/case";
 import { redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import NewHouseholdModal from "./NewHouseholdModel";
 import HouseholdItem from "./HouseholdItem";
-import { HOUSEHOLD_PROFILE_KEY } from "@entities/case/model/keys";
+import { HOUSEHOLD_PROFILE_KEY } from "@entities/case/";
 
 export default function HouseholdProfileNavigation() {
   const [newHouseholdModalOpen, setIsNewHouseholdModalOpen] = useState(false);

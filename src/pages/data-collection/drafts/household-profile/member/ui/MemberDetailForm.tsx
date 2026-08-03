@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Camera, Plus } from "lucide-react";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Select } from "@shared/ui/Inputs/Select";
-import { Input } from "@shared/ui/Inputs/Input";
+import { FormField } from "@shared/ui";
+import { Select } from "@shared/ui";
+import { Input } from "@shared/ui";
 import type { Gender, MemberFormValues } from "../model/types";
 
 type Props = {

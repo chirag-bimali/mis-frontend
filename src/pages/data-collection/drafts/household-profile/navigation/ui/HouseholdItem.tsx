@@ -1,5 +1,5 @@
-import { Button } from "@shared/ui/Button/Button";
-import { ButtonLink } from "@shared/ui/ButtonLink";
+import { Button } from "@shared/ui";
+import { ButtonLink } from "@shared/ui";
 import { ChevronDown, ChevronRight, X } from "lucide-react";
 import { useState } from "react";
 import { FAMILY_SECTIONS } from "../model";

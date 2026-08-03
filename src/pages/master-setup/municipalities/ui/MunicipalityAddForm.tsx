@@ -10,15 +10,15 @@ import {
   type CreateMunicipality,
   type Municipality,
 } from "../model";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Input } from "@shared/ui/Inputs/Input";
-import { Select } from "@shared/ui/Inputs/Select";
-import { SearchSelect } from "@shared/ui/Inputs/SearchSelect";
-import { useSearchDistricts } from "@entities/district/hooks/district.query";
-import { useAreasByDistrict } from "@entities/area/hooks/area.query";
+import { FormField } from "@shared/ui";
+import { Input } from "@shared/ui";
+import { Select } from "@shared/ui";
+import { SearchSelect } from "@shared/ui";
+import { useSearchDistricts } from "@entities/district";
+import { useAreasByDistrict } from "@entities/area";
 import { Modal } from "@shared/ui/Modal";
 import { Button } from "@shared/ui/Button";
-import { mapServerErrors } from "@shared/util/mapServerErrors";
+import { mapServerErrors } from "@shared/util";
 import type { ApiResponse } from "@shared/model";
 
 // const actionButtonVariants = cva(

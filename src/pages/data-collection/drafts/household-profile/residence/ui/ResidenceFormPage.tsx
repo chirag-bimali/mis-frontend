@@ -1,6 +1,6 @@
 import { Home } from "lucide-react";
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Select } from "@shared/ui/Inputs/Select";
+import { FormField } from "@shared/ui";
+import { Select } from "@shared/ui";
 import {
   DISTRICT_OPTIONS,
   REASON_FOR_MIGRATION_OPTIONS,
@@ -11,10 +11,10 @@ import { ResidenceSchema, type Residence } from "../model/types";
 import ResidenceFormFooter from "./ResidenceFormFooter";
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useFormDraftStore } from "@entities/case";
-import { HOUSEHOLD_PROFILE_HOUSEHOLD_RESIDENCE_KEY } from "@entities/case/model/keys";
+import { HOUSEHOLD_PROFILE_HOUSEHOLD_RESIDENCE_KEY } from "@entities/case";
 import { useEffect } from "react";
-import { useOptionItemByOptionListKey } from "@entities/option/hooks/option-item.query";
-import { optionItemToSelectOption } from "@entities/option/helpers/optionItemToSelectOption";
+import { useOptionItemByOptionListKey } from "@entities/option";
+import { optionItemToSelectOption } from "@entities/option";
 // import optionItemToSelectOption from "@shared/lib/optionItemToSelectOption";
 
 export default function ResidenceFormPage() {

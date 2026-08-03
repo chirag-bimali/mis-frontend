@@ -1,5 +1,5 @@
-import { FormField } from "@shared/ui/Inputs/FormField";
-import { Select } from "@shared/ui/Inputs/Select";
+import { FormField } from "@shared/ui";
+import { Select } from "@shared/ui";
 import Section from "./Section";
 import { useOptionItemByOptionListKey } from "@entities/option";
 import Footer from "./Footer";

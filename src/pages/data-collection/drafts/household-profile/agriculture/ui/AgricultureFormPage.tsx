@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "./Header";
-import ToggleField from "@shared/ui/Inputs/ToggleField";
+import { ToggleField } from "@shared/ui";
 import Body from "./Body";
 import Footer from "./Footer";
 
