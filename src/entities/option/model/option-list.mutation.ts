@@ -1,9 +1,9 @@
 import { queryClient } from "@shared/api";
-import type { OptionList } from "../model";
+import type { OptionList } from "@shared/model";
 import { createOptionList, deleteOptionList, updateOptionList } from "../api";
 import { optionListKeys } from "../model";
 import { useMutation } from "@tanstack/react-query";
-import type { CreateOptionList, UpdateOptionList } from "../model/types";
+import type { CreateOptionList, UpdateOptionList } from "@shared/model";
 
 export const useCreateOptionList = () => {
   return useMutation<OptionList, unknown, CreateOptionList>({

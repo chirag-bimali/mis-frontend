@@ -3,7 +3,8 @@ import { useState } from "react";
 
 import { Button } from "@shared/ui/Button";
 import { Modal } from "@shared/ui/Modal";
-import { useDeleteOptionItem, type OptionItem } from "@entities/option";
+import { type OptionItem } from "@shared/model";
+import { useDeleteOptionItem } from "@entities/option";
 
 // import { useDeleteOptionItem } from "../api";
 // import type { OptionItem } from "../model";

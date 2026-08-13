@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { queryClient } from "@shared/api";
-import type { OptionItem } from "../model";
-import type { CreateOptionItem, UpdateOptionItem } from "../model";
+import type { OptionItem } from "@shared/model";
+import type { CreateOptionItem, UpdateOptionItem } from "@shared/model";
 
 import { createOptionItem, deleteOptionItem, updateOptionItem } from "../api";
 import { optionItemKeys } from "../model";

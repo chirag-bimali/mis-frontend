@@ -7,11 +7,8 @@ import { Button } from "@shared/ui";
 import { Input } from "@shared/ui";
 import { FormField } from "@shared/ui";
 import { Modal } from "@shared/ui";
-import {
-  createOptionItemSchema,
-  useCreateOptionItem,
-  type CreateOptionItem,
-} from "@entities/option";
+import { useCreateOptionItem } from "@entities/option";
+import { createOptionItemSchema, type CreateOptionItem } from "@shared/model";
 
 // import { useCreateOptionItem } from "../api";
 // import {

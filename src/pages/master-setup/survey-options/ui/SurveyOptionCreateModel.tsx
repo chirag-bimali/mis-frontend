@@ -8,10 +8,7 @@ import { FormField } from "@shared/ui";
 import { Textarea } from "@shared/ui";
 import { Input } from "@shared/ui";
 import { Modal } from "@shared/ui";
-import {
-  createOptionListSchema,
-  type CreateOptionList,
-} from "@entities/option";
+import { createOptionListSchema, type CreateOptionList } from "@shared/model";
 import { useCreateOptionList } from "@entities/option";
 
 interface SurveyOptionCreateModalProps {

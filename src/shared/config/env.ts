@@ -17,6 +17,7 @@ export const env = {
   APP_NAME: getEnvVar("VITE_APP_NAME"),
   API_BASE_URL: getEnvVar("VITE_API_BASE_URL"),
   ENV: getEnvVar("VITE_ENV"),
+  ENABLE_MOCKS: getEnvVar("VITE_ENABLE_MOCKS") === "true",
 
   // Derived helpers (no validation needed)
   isDevelopment: import.meta.env.VITE_ENV === "development",

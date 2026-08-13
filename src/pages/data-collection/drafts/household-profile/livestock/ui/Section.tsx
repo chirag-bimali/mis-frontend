@@ -1,0 +1,39 @@
+import { useState } from "react";
+import YesNoToggle from "./YesNoToggle";
+
+type SectionProps = {
+  number: number;
+  title: string;
+  titleNe: string;
+  children: React.ReactNode;
+};
+
+export default function Section({
+  number,
+  title,
+  titleNe,
+  children,
+}: SectionProps) {
+  const [toggleAnimalCensus, setToggleAnimalCensus] = useState<"yes" | "no">(
+    "no",
+  );
+  return (
+    <section className="p-6 space-y-6">
+      <div>
+        <div className="flex gap-4 items-start">
+          <h3 className="text-xs font-medium text-pri-500 uppercase tracking-wide pb-2">
+            Section {number.toString().padStart(2, "0")}: {title}
+          </h3>
+          <p className="text-xs text-ink-400">( {titleNe} )</p>
+        </div>
+        <YesNoToggle
+          value={toggleAnimalCensus}
+          onChange={() => {
+            setToggleAnimalCensus(toggleAnimalCensus === "yes" ? "no" : "yes");
+          }}
+        />
+      </div>
+      <div className="">{children}</div>
+    </section>
+  );
+}

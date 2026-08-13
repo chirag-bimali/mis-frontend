@@ -12,10 +12,11 @@ import { Textarea } from "@shared/ui";
 import { Modal } from "@shared/ui";
 import {
   updateOptionListSchema,
-  useUpdateOptionList,
   type OptionList,
   type UpdateOptionList,
-} from "@entities/option";
+} from "@shared/model";
+
+import { useUpdateOptionList } from "@entities/option";
 
 // import { useUpdateOptionList } from "../api";
 // import type { OptionList } from "../model";

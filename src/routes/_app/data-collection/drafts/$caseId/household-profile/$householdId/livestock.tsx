@@ -1,16 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import Livestock from "@pages/data-collection/drafts/household-profile/livestock";
 
 export const Route = createFileRoute(
-  '/_app/data-collection/drafts/$caseId/household-profile/$householdId/livestock',
+  "/_app/data-collection/drafts/$caseId/household-profile/$householdId/livestock",
 )({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return (
-    <div>
-      Hello
-      "/_app/data-collection/forms/drafts/$surveyId/household-profile/live-stock"!
-    </div>
-  )
+  return <Livestock />;
 }

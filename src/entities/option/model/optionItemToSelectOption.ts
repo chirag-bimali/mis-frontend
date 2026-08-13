@@ -1,4 +1,4 @@
-import { type OptionItem } from "../model/types";
+import { type OptionItem } from "@shared/model";
 import { type SelectOption } from "@shared/ui";
 
 export const optionItemToSelectOption = (option: OptionItem): SelectOption => {

@@ -1,6 +1,6 @@
 import { http } from "@shared/api";
-import type { OptionList } from "../model";
-import type { UpdateOptionList } from "../model/types";
+import type { OptionList } from "@shared/model";
+import type { UpdateOptionList } from "@shared/model";
 
 export const getOptionList = async (): Promise<OptionList[]> => {
   try {

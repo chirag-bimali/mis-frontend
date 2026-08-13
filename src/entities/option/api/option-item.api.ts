@@ -1,6 +1,6 @@
 import { http } from "@shared/api";
 
-import type { CreateOptionItem, OptionItem, UpdateOptionItem } from "../model";
+import type { CreateOptionItem, OptionItem, UpdateOptionItem } from "@shared/model";
 import type { ApiResponse } from "@shared/model";
 
 export const getOptionItemsByOptionListId = async (
@@ -16,10 +16,10 @@ export const getOptionItemsByOptionListId = async (
 };
 
 export const getOptionItemsByOptionListKey = async (
-  optionListId: string,
+  optionListKey: string,
 ): Promise<OptionItem[]> => {
   try {
-    const response = (await http.get(`/OptionItem/OptionList/${optionListId}`))
+    const response = (await http.get(`/OptionItem/OptionList/${optionListKey}`))
       .data as ApiResponse<OptionItem[]>;
     if (response.data) return response.data;
     return [];
