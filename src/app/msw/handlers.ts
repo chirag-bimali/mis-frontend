@@ -1,5 +1,13 @@
-import { animalTypeHandlers } from "@entities/data-collection/livestock";
+import {
+  aiServiceStatusHandlers,
+  animalTypeHandlers,
+  birthHistoryHandlers,
+} from "@entities/data-collection/livestock";
 
-const handlers = [...animalTypeHandlers];
+const handlers = [
+  ...animalTypeHandlers,
+  ...birthHistoryHandlers,
+  ...aiServiceStatusHandlers,
+];
 
 export default handlers;

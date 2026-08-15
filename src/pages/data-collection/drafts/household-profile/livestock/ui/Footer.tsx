@@ -25,6 +25,7 @@ export default function Footer({ onPrevious, onNext }: FooterProps) {
           variant="secondary"
           size="sm"
           className="w-full justify-center sm:w-auto"
+          type="submit"
         >
           <span>Save Draft</span>
           <span className="text-xs font-semibold text-ink-400">

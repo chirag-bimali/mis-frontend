@@ -6,3 +6,7 @@ export const HOUSEHOLD_PROFILE_HOUSEHOLD_KEY = (housholdId: string) =>
 export const HOUSEHOLD_PROFILE_HOUSEHOLD_RESIDENCE_KEY = (
   householdId: string,
 ) => `residence-${householdId}`;
+
+export const HOUSEHOLD_PROFILE_HOUSEHOLD_LIVESTOCK_KEY = (
+  householdId: string,
+) => `livestock-${householdId}`;
