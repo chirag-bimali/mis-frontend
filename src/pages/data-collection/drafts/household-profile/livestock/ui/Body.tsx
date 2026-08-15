@@ -21,7 +21,8 @@ export default function Body() {
     name: "animals",
   });
 
-  const { data: animalTypes = [] } = useOptionItemByOptionListKey("animal_type");
+  const { data: animalTypes = [] } =
+    useOptionItemByOptionListKey("animal_type");
   const { data: birthHistories = [] } =
     useOptionItemByOptionListKey("birth_history");
   const { data: aiServiceStatuses = [] } =
@@ -93,7 +94,9 @@ export default function Body() {
                       <input
                         type="checkbox"
                         checked={checked}
-                        onChange={(e) => toggleAnimal(item.id, e.target.checked)}
+                        onChange={(e) =>
+                          toggleAnimal(item.id, e.target.checked)
+                        }
                         className="h-4.5 w-4.5 cursor-pointer"
                       />
                       <div className="flex items-center gap-2 font-bold">
@@ -105,21 +108,20 @@ export default function Body() {
                         </label>
                       </div>
                     </div>
-                    {checked && (
-                      <div className="flex flex-col gap-1 items-start">
-                        <label className="text-sm text-ink-400 font-medium">
-                          Count
-                        </label>
-                        <input
-                          type="number"
-                          min={0}
-                          className="w-full h-8 rounded-md border border-ink-300 px-2 text-sm text-ink-600"
-                          {...register(`animals.${index}.count`, {
-                            valueAsNumber: true,
-                          })}
-                        />
-                      </div>
-                    )}
+                    <div className="flex flex-col gap-1 items-start">
+                      <label className="text-sm text-ink-400 font-medium">
+                        Count
+                      </label>
+                      <input
+                        type="number"
+                        min={0}
+                        disabled={!checked}
+                        className="w-full h-8 rounded-md border border-ink-300 px-2 text-sm text-ink-600"
+                        {...register(`animals.${index}.count`, {
+                          valueAsNumber: true,
+                        })}
+                      />
+                    </div>
                   </div>
                 );
               })}
@@ -226,10 +228,7 @@ export default function Body() {
                     labelSuffix="(सिमेन/साँढेको नाम)"
                     errorText={errors.aiService?.semenOrBullName?.message}
                   >
-                    <Input
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
+                    <Input value={field.value} onChange={field.onChange} />
                   </FormField>
                 )}
               />
