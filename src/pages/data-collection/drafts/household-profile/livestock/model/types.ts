@@ -28,14 +28,14 @@ export const livestockFormSchema = z
   .superRefine((data, ctx) => {
     if (data.hasLivestockPractice && data.animals.length === 0) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["animals"],
         message: "Select at least one animal",
       });
     }
     if (data.hasAiServicePractice && !data.aiService) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["aiService"],
         message: "AI service details are required",
       });
