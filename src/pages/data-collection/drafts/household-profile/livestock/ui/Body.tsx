@@ -8,7 +8,6 @@ export default function Body() {
     useState<boolean>(false);
 
   const { data: animalType } = useOptionItemByOptionListKey("animal_type");
-  console.log(animalType);
   return (
     <section className="flex flex-1 flex-col overflow-hidden">
       <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-5">
