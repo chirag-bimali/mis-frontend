@@ -6,6 +6,9 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    allowedHosts: [".monkeycode-ai.live"],
+  },
   plugins: [
     tailwindcss(),
     tanstackRouter({
