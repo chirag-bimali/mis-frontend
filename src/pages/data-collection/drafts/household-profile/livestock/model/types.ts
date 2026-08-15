@@ -3,15 +3,16 @@ import { livestockAnimal } from "@entities/data-collection/livestock";
 
 // One row in the animal census: which animal type was selected and its count.
 // Reuses the livestockAnimal entity schema, dropping server-managed fields.
-export const livestockAnimalFormSchema = livestockAnimal
-  .pick({ animalTypeId: true })
-  .extend({ count: z.number().int().nonnegative() });
+export const livestockAnimalFormSchema = livestockAnimal.pick({
+  animalTypeId: true,
+  count: true,
+});
 
 // AI service practice details. Reuses the livestockAiService entity schema,
 // dropping server-managed fields and nested option objects.
 export const livestockAiServiceFormSchema = z.object({
   livestockAnimalTypeId: z.string().min(1, "Animal type is required"),
-  ageYears: z.number().int().nonnegative(),
+  ageYears: z.number().int().positive("Age must be a positive number"),
   birthHistoryId: z.string().min(1, "Birth history is required"),
   semenOrBullName: z.string().min(1, "Semen/Bull name is required"),
   aiServiceDate: z.string().min(1, "AI service date is required"),
@@ -43,5 +44,9 @@ export const livestockFormSchema = z
   });
 
 export type LivestockFormValues = z.infer<typeof livestockFormSchema>;
-export type LivestockAnimalFormValues = z.infer<typeof livestockAnimalFormSchema>;
-export type LivestockAiServiceFormValues = z.infer<typeof livestockAiServiceFormSchema>;
+export type LivestockAnimalFormValues = z.infer<
+  typeof livestockAnimalFormSchema
+>;
+export type LivestockAiServiceFormValues = z.infer<
+  typeof livestockAiServiceFormSchema
+>;

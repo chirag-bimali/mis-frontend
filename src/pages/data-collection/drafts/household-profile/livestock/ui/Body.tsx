@@ -53,6 +53,7 @@ export default function Body() {
       });
     }
   };
+  console.log(errors);
 
   return (
     <section className="flex flex-1 flex-col overflow-hidden">
@@ -80,32 +81,42 @@ export default function Body() {
           {hasLivestockPractice && (
             <div className="flex gap-5 flex-wrap">
               {animalTypes.map((item) => {
-                const index = fields.findIndex(
+                const fieldIndex = fields.findIndex(
                   (f) => f.animalTypeId === item.id,
                 );
-                const checked = index !== -1;
+                const checked = fieldIndex !== -1;
 
                 return (
                   <div
                     className="flex flex-col p-6 rounded-field items-center gap-4 bg-ink-100 border border-pri-300"
                     key={item.id}
                   >
-                    <div className="flex gap-2 items-center w-full">
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={(e) =>
-                          toggleAnimal(item.id, e.target.checked)
-                        }
-                        className="h-4.5 w-4.5 cursor-pointer"
-                      />
-                      <div className="flex items-center gap-2 font-bold">
-                        <label className="text-ink-600">
-                          {item.labelEn?.toUpperCase()}
-                        </label>
-                        <label className="text-sm text-ink-400">
-                          ({item.labelNe})
-                        </label>
+                    <div className="flex gap-0 items-start flex-col w-full">
+                      <div className="flex gap-2 items-center w-full">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(e) =>
+                            toggleAnimal(item.id, e.target.checked)
+                          }
+                          className="h-4.5 w-4.5 cursor-pointer"
+                        />
+                        <div className="flex items-center gap-2 font-bold">
+                          <label className="text-ink-600">
+                            {item.labelEn?.toUpperCase()}
+                          </label>
+                          <label className="text-sm text-ink-400">
+                            ({item.labelNe})
+                          </label>
+                        </div>
+                      </div>
+                      <div className="flex h-6 w-full">
+                        <p
+                          className="text-sm font-semibold text-error-600 max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
+                          title={errors?.animals?.[fieldIndex]?.message}
+                        >
+                          {errors?.animals?.[fieldIndex]?.count?.message }  
+                        </p>
                       </div>
                     </div>
                     <div className="flex flex-col gap-1 items-start">
@@ -117,7 +128,7 @@ export default function Body() {
                         min={0}
                         disabled={!checked}
                         className="w-full h-8 rounded-md border border-ink-300 px-2 text-sm text-ink-600"
-                        {...register(`animals.${index}.count`, {
+                        {...register(`animals.${fieldIndex}.count`, {
                           valueAsNumber: true,
                         })}
                       />
@@ -125,11 +136,6 @@ export default function Body() {
                   </div>
                 );
               })}
-              {errors.animals?.root?.message && (
-                <p className="text-sm font-semibold text-error-600">
-                  {errors.animals.root.message}
-                </p>
-              )}
             </div>
           )}
         </section>
