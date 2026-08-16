@@ -11,6 +11,8 @@ import {
   religionHandler,
 } from "@entities/data-collection/social-cultural";
 
+import { decisionMakerHandler } from "@entities/data-collection/decision";
+
 const handlers = [
   ...animalTypeHandlers,
   ...birthHistoryHandlers,
@@ -19,6 +21,7 @@ const handlers = [
   ...ethnicityHandler,
   ...motherTongueHandler,
   ...religionHandler,
+  ...decisionMakerHandler,
 ];
 
 export default handlers;
