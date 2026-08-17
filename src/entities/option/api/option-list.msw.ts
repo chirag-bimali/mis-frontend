@@ -5,42 +5,42 @@ import { env } from "@shared/config/env";
 
 const optionList: OptionList[] = [
   {
-    id: "1",
+    id: crypto.randomUUID(),
     labelEn: "Agricultural Land Type",
     labelNe: "कृषि योग्य जमिनको प्रकार",
     key: "agricultural_land_type",
     description: "This is the first option list.",
   },
   {
-    id: "2",
+    id: crypto.randomUUID(),
     labelEn: "Stove Type",
     labelNe: "चुलोको प्रकार",
     key: "stove_type",
     description: "This is the second option list.",
   },
   {
-    id: "3",
+    id: crypto.randomUUID(),
     labelEn: "Main Source of Electricity",
     labelNe: "मुख्य बिजुलीको स्रोत",
     key: "main_source_of_electricity",
     description: "This is the third option list.",
   },
   {
-    id: "4",
+    id: crypto.randomUUID(),
     labelEn: "Decision Maker",
     labelNe: "निर्णय गर्ने व्यक्ति",
     key: "decision_maker",
     description: "This is the fourth option list.",
   },
   {
-    id: "5",
+    id: crypto.randomUUID(),
     labelEn: "Gender",
     labelNe: "लिङ्ग",
     key: "gender",
     description: "This is the fifth option list.",
   },
   {
-    id: "6",
+    id: crypto.randomUUID(),
     labelEn: "Vehicle Type",
     labelNe: "सवारी साधनको प्रकार",
     key: "vehicle_type",
@@ -69,7 +69,7 @@ export const optionListHandlers = [
     );
 
     return HttpResponse.json<ApiResponse<OptionList[]>>({
-      data: searchResults,
+      data: searchResults ?? [],
       message: "Option lists fetched successfully.",
       success: true,
       statusCode: 200,

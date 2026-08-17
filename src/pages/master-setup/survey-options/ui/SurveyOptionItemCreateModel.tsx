@@ -1,19 +1,18 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui";
 import { Input, SearchSelect } from "@shared/ui";
 import { FormField } from "@shared/ui";
 import { Modal } from "@shared/ui";
-import { optionListToSelectOption, useCreateOptionItem, useOptionListSearch } from "@entities/option";
+import {
+  optionListToSelectOption,
+  useCreateOptionItem,
+  useOptionListSearch,
+} from "@entities/option";
 import { createOptionItemSchema, type CreateOptionItem } from "@shared/model";
-
-// import { useCreateOptionItem } from "../api";
-// import {
-//   createOptionItemFormSchema,
-// } from "../model/types";
 
 interface SurveyOptionItemCreateModalProps {
   isOpen: boolean;
@@ -37,13 +36,14 @@ export function SurveyOptionItemCreateModal({
   const [childOptionListSearchValue, setChildOptionListSearchValue] =
     useState<string>("");
 
-  const { data: childOptionListData } = useOptionListSearch(
+  const { data: childOptionListData = [] } = useOptionListSearch(
     childOptionListSearchValue,
     Boolean(childOptionListSearchValue),
   );
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { isSubmitting, errors },
@@ -128,20 +128,28 @@ export function SurveyOptionItemCreateModal({
           />
         </FormField>
 
-        <FormField
-          label="Child Option List"
-          errorText={errors.childOptionListId?.message}
-        >
-          <SearchSelect
-            searchValue={childOptionListSearchValue}
-            onSearchValueChange={setChildOptionListSearchValue}
-            options={childOptionListData?.map(optionListToSelectOption) || []}
-            {...register("childOptionListId")}
-            placeholder="Enter child option list ID"
-            error={Boolean(errors.childOptionListId)}
-            errorMessage={errors.childOptionListId?.message}
-          />
-        </FormField>
+        <Controller
+          name="childOptionListId"
+          control={control}
+          render={({ field }) => (
+            <FormField
+              label="Child Option List"
+              errorText={errors.childOptionListId?.message}
+            >
+              <SearchSelect
+                searchValue={childOptionListSearchValue}
+                onSearchValueChange={setChildOptionListSearchValue}
+                options={
+                  childOptionListData?.map(optionListToSelectOption) || []
+                }
+                onSelect={(value) => field.onChange(value.value)}
+                placeholder="Enter child option list ID"
+                error={Boolean(errors.childOptionListId)}
+                errorMessage={errors.childOptionListId?.message}
+              />
+            </FormField>
+          )}
+        />
 
         {!optionListId ? (
           <p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
@@ -164,7 +172,11 @@ export function SurveyOptionItemCreateModal({
           >
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={() => console.log("Submit button clicked")}
+          >
             <Plus className="h-4 w-4" />
             {isSubmitting ? "Creating..." : "Create Option Item"}
           </Button>

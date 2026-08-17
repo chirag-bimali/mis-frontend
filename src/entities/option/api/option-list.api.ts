@@ -1,5 +1,5 @@
 import { http } from "@shared/api";
-import type { OptionList } from "@shared/model";
+import type { ApiResponse, OptionList } from "@shared/model";
 import type { UpdateOptionList } from "@shared/model";
 
 export const getOptionList = async (): Promise<OptionList[]> => {
@@ -15,15 +15,12 @@ export const getOptionList = async (): Promise<OptionList[]> => {
 export const searchOptionList = async (
   query: string,
 ): Promise<OptionList[]> => {
-  try {
-    const response = await http.get("/optionList/search", {
-      params: { query },
-    });
-    return response.data as OptionList[];
-  } catch (error) {
-    console.error("Error searching option list:", error);
-    return [];
-  }
+  const response = await http.get("/optionList/search", {
+    params: { query },
+  });
+  const result = response.data as ApiResponse<OptionList[]>;
+  console.log("searchOptionList result:", result);
+  return result.data ?? [];
 };
 
 export const createOptionList = async (
