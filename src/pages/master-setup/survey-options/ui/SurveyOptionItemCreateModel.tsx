@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui";
-import { Input } from "@shared/ui";
+import { Input, SearchSelect } from "@shared/ui";
 import { FormField } from "@shared/ui";
 import { Modal } from "@shared/ui";
-import { useCreateOptionItem } from "@entities/option";
+import { optionListToSelectOption, useCreateOptionItem, useOptionListSearch } from "@entities/option";
 import { createOptionItemSchema, type CreateOptionItem } from "@shared/model";
 
 // import { useCreateOptionItem } from "../api";
@@ -34,6 +34,13 @@ export function SurveyOptionItemCreateModal({
 }: SurveyOptionItemCreateModalProps) {
   const { mutateAsync: createOptionItemAsync } = useCreateOptionItem();
   const [apiError, setApiError] = useState<string | null>(null);
+  const [childOptionListSearchValue, setChildOptionListSearchValue] =
+    useState<string>("");
+
+  const { data: childOptionListData } = useOptionListSearch(
+    childOptionListSearchValue,
+    Boolean(childOptionListSearchValue),
+  );
 
   const {
     register,
@@ -45,6 +52,7 @@ export function SurveyOptionItemCreateModal({
     defaultValues: {
       labelEn: "",
       labelNe: "",
+      childOptionListId: undefined,
       optionListId: optionListId,
     },
   });
@@ -61,6 +69,7 @@ export function SurveyOptionItemCreateModal({
   const handleSave = async (data: CreateOptionItem) => {
     const normalizedPayload = {
       optionListId: optionListId.trim(),
+      childOptionListId: data.childOptionListId,
       labelEn: data.labelEn.trim(),
       labelNe: data.labelNe.trim(),
     };
@@ -73,6 +82,7 @@ export function SurveyOptionItemCreateModal({
       reset({
         labelEn: "",
         labelNe: "",
+        childOptionListId: undefined,
         optionListId: optionListId,
       });
 
@@ -115,6 +125,21 @@ export function SurveyOptionItemCreateModal({
             {...register("labelNe")}
             placeholder="Nepali item name"
             hasError={Boolean(errors.labelNe)}
+          />
+        </FormField>
+
+        <FormField
+          label="Child Option List"
+          errorText={errors.childOptionListId?.message}
+        >
+          <SearchSelect
+            searchValue={childOptionListSearchValue}
+            onSearchValueChange={setChildOptionListSearchValue}
+            options={childOptionListData?.map(optionListToSelectOption) || []}
+            {...register("childOptionListId")}
+            placeholder="Enter child option list ID"
+            error={Boolean(errors.childOptionListId)}
+            errorMessage={errors.childOptionListId?.message}
           />
         </FormField>
 

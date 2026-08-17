@@ -1,6 +1,6 @@
 import { optionListKeys } from "../model";
 import { useQuery } from "@tanstack/react-query";
-import { getOptionList } from "../api";
+import { getOptionList, searchOptionList } from "../api";
 
 export const useOptionList = () =>
   useQuery({
@@ -10,4 +10,15 @@ export const useOptionList = () =>
     meta: {
       persist: true,
     },
+  });
+
+export const useOptionListSearch = (query: string, enabled: boolean = true) =>
+  useQuery({
+    queryKey: optionListKeys.search(query),
+    queryFn: () => searchOptionList(query),
+    placeholderData: [],
+    meta: {
+      persist: true,
+    },
+    enabled,
   });

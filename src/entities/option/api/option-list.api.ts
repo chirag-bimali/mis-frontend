@@ -12,7 +12,23 @@ export const getOptionList = async (): Promise<OptionList[]> => {
   }
 };
 
-export const createOptionList = async (optionList: Omit<OptionList, "id">): Promise<OptionList> => {
+export const searchOptionList = async (
+  query: string,
+): Promise<OptionList[]> => {
+  try {
+    const response = await http.get("/optionList/search", {
+      params: { query },
+    });
+    return response.data as OptionList[];
+  } catch (error) {
+    console.error("Error searching option list:", error);
+    return [];
+  }
+};
+
+export const createOptionList = async (
+  optionList: Omit<OptionList, "id">,
+): Promise<OptionList> => {
   try {
     const response = await http.post("/optionList", optionList);
     return response.data as OptionList;
