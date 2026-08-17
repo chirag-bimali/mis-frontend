@@ -8,8 +8,14 @@ import type { Health } from "../model";
 import { ListCheck } from "lucide-react";
 import IllnessTypes from "./IllnessTypes";
 import cn from "@shared/lib";
+import { useNavigate, useParams } from "@tanstack/react-router";
 
 export default function HealthFormBody() {
+  const { caseId, householdId } = useParams({
+    from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/health",
+  });
+  const navigate = useNavigate();
+
   const [insuraneOn, setInsuranceOn] = useState(false);
   const [illnessOn, setIllnessOn] = useState(false);
   const { control, handleSubmit } = useForm<Health>({
@@ -26,8 +32,25 @@ export default function HealthFormBody() {
       illnesses: [],
     },
   });
-  const onSubmit = (data: Health) => {
-    console.log(data);
+  const onSubmit = () => {};
+
+  const onPrevious = () => {
+    navigate({
+      to: "/data-collection/drafts/$caseId/household-profile/$householdId/facilities",
+      params: {
+        caseId,
+        householdId,
+      },
+    });
+  };
+  const onNext = () => {
+    navigate({
+      to: "/data-collection/drafts/$caseId/household-profile/$householdId/agriculture",
+      params: {
+        caseId,
+        householdId,
+      },
+    });
   };
 
   return (
@@ -286,12 +309,9 @@ export default function HealthFormBody() {
         </section>
       </div>
       <HealthFormFooter
-        onPrevious={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onNext={function (): void {
-          throw new Error("Function not implemented.");
-        }}
+        onPrevious={onPrevious}
+        onNext={onNext}
+        onSaveDraft={onSubmit}
       />
     </form>
   );

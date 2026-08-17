@@ -12,7 +12,10 @@ export default function Body() {
   const { data: motherTongues } = useOptionItemByOptionListKey("mother_tongue");
   const { data: commonLanguages } =
     useOptionItemByOptionListKey("common_language");
-  const { control } = useFormContext<SocialForm>();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<SocialForm>();
 
   return (
     <div className="flex-1 flex-col overflow-y-scroll px-17 py-13 md:px-16 md:py-12">
@@ -35,6 +38,7 @@ export default function Body() {
                 as="div"
                 label="Ethnicity"
                 labelSuffix="(पशुको प्रकार)"
+                errorText={errors.ethnicityId?.message}
               >
                 <Select
                   placeholder="Select your ethnicity"
@@ -49,7 +53,12 @@ export default function Body() {
             control={control}
             name="religionId"
             render={({ field }) => (
-              <FormField as="div" label="Religion" labelSuffix="(पशुको प्रकार)">
+              <FormField
+                as="div"
+                label="Religion"
+                labelSuffix="(पशुको प्रकार)"
+                errorText={errors.religionId?.message}
+              >
                 <Select
                   placeholder="Select you religion"
                   options={religions?.map(optionItemToSelectOption)}
@@ -67,6 +76,7 @@ export default function Body() {
                 as="div"
                 label="Mother Tongue"
                 labelSuffix="(पशुको प्रकार)"
+                errorText={errors.mothertoungueId?.message}
               >
                 <Select
                   placeholder="Select you mother tongue"
@@ -85,6 +95,7 @@ export default function Body() {
                 as="div"
                 label="Common Language"
                 labelSuffix="(पशुको प्रकार)"
+                errorText={errors.commonLanguageId?.message}
               >
                 <Select
                   placeholder="Select you common language"

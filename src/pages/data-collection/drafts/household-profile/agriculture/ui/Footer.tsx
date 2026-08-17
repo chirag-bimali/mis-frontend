@@ -4,9 +4,10 @@ import { Button } from "@shared/ui/Button";
 type FooterProps = {
   onPrevious: () => void;
   onNext: () => void;
+  onSubmit: () => void;
 };
 
-export default function Footer({ onPrevious, onNext }: FooterProps) {
+export default function Footer({ onPrevious, onNext, onSubmit }: FooterProps) {
   return (
     <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-ink-200 px-5 py-4">
       <Button
@@ -26,6 +27,7 @@ export default function Footer({ onPrevious, onNext }: FooterProps) {
           size="sm"
           className="w-full justify-center sm:w-auto"
           type="submit"
+          onClick={onSubmit}
         >
           <span>Save Draft</span>
           <span className="text-xs font-semibold text-ink-400">

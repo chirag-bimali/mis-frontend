@@ -82,6 +82,7 @@ const cropGroups = [
 ];
 
 export default function Body() {
+  const [isFormEnabled, setIsFormEnabled] = useState(true);
   const [activeGroups, setActiveGroups] = useState<string[]>(["oilseed-crops"]);
   const [improvedSeeds, setImprovedSeeds] = useState<string>("yes");
   const [chemicalPesticides, setChemicalPesticides] = useState<string>("yes");
@@ -99,6 +100,31 @@ export default function Body() {
 
   return (
     <>
+      <div className="px-6 pt-6">
+        <div className="flex items-start justify-between border-b border-slate-200 pb-6">
+          <div>
+            <h2 className="text-md font-bold text-slate-900">
+              Involved in Agriculture?
+            </h2>
+            <p className="text-xs text-slate-500">
+              परिवार कृषिमा संलग्न छ? (हो/हैन)
+            </p>
+          </div>
+
+          <div>
+            <ToggleField
+              value={isFormEnabled ? "yes" : "no"}
+              onChange={(v) => setIsFormEnabled(v === "yes")}
+              options={[
+                { id: "yes", value: "yes", labelEn: "Yes", labelNe: "हो" },
+                { id: "no", value: "no", labelEn: "No", labelNe: "होइन" },
+              ]}
+              name="involved-agriculture"
+            />
+          </div>
+        </div>
+      </div>
+
       <Section number={1} title="Land Details" titleNe="जग्गाको विवरण">
         <div className="grid grid-cols-2 gap-6">
           <div className="space-y-2">

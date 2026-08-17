@@ -9,7 +9,10 @@ import {
 export default function Body() {
   const { data: decisionMakers } =
     useOptionItemByOptionListKey("decision_makers");
-  const { control } = useFormContext<DecisionForm>();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<DecisionForm>();
 
   return (
     <div className="flex-1 flex-col overflow-y-scroll px-17 py-13 md:px-16 md:py-12">
@@ -32,6 +35,7 @@ export default function Body() {
                 as="div"
                 label="Household Exp."
                 labelSuffix="(घरखर्च)"
+                errorText={errors.householdExpenseId?.message}
               >
                 <Select
                   placeholder="Select decision maker"
@@ -50,6 +54,7 @@ export default function Body() {
                 as="div"
                 label="Property"
                 labelSuffix="(जग्गा जमिन)"
+                errorText={errors.propertyId?.message}
               >
                 <Select
                   placeholder="Select decision maker"
@@ -64,7 +69,12 @@ export default function Body() {
             control={control}
             name="educationId"
             render={({ field }) => (
-              <FormField as="div" label="Education" labelSuffix="(शिक्षा)">
+              <FormField
+                as="div"
+                label="Education"
+                labelSuffix="(शिक्षा)"
+                errorText={errors.educationId?.message}
+              >
                 <Select
                   placeholder="Select decision maker"
                   options={decisionMakers?.map(optionItemToSelectOption)}
@@ -78,7 +88,12 @@ export default function Body() {
             control={control}
             name="investmentId"
             render={({ field }) => (
-              <FormField as="div" label="Investments" labelSuffix="(लगानी)">
+              <FormField
+                as="div"
+                label="Investments"
+                labelSuffix="(लगानी)"
+                errorText={errors.investmentId?.message}
+              >
                 <Select
                   placeholder="Select decision maker"
                   options={decisionMakers?.map(optionItemToSelectOption)}
@@ -92,7 +107,12 @@ export default function Body() {
             control={control}
             name="governanceId"
             render={({ field }) => (
-              <FormField as="div" label="Governance" labelSuffix="(सुशासन)">
+              <FormField
+                as="div"
+                label="Governance"
+                labelSuffix="(सुशासन)"
+                errorText={errors.governanceId?.message}
+              >
                 <Select
                   placeholder="Select decision maker"
                   options={decisionMakers?.map(optionItemToSelectOption)}

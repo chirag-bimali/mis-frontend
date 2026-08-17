@@ -3,7 +3,7 @@ import { Button } from "@shared/ui/Button";
 
 type HealthFormFooterProps = {
   onPrevious: () => void;
-  onSaveDraft?: () => void;
+  onSaveDraft: () => void;
   onNext: () => void;
 };
 
