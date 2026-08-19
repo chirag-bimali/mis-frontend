@@ -1,19 +1,18 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui";
-import { Input } from "@shared/ui";
+import { Input, SearchSelect } from "@shared/ui";
 import { FormField } from "@shared/ui";
 import { Modal } from "@shared/ui";
-import { useCreateOptionItem } from "@entities/option";
+import {
+  optionListToSelectOption,
+  useCreateOptionItem,
+  useOptionListSearch,
+} from "@entities/option";
 import { createOptionItemSchema, type CreateOptionItem } from "@shared/model";
-
-// import { useCreateOptionItem } from "../api";
-// import {
-//   createOptionItemFormSchema,
-// } from "../model/types";
 
 interface SurveyOptionItemCreateModalProps {
   isOpen: boolean;
@@ -34,17 +33,31 @@ export function SurveyOptionItemCreateModal({
 }: SurveyOptionItemCreateModalProps) {
   const { mutateAsync: createOptionItemAsync } = useCreateOptionItem();
   const [apiError, setApiError] = useState<string | null>(null);
+  const [childOptionListSearchValue, setChildOptionListSearchValue] =
+    useState<string>("");
+
+  const {
+    data: childOptionListData = [],
+    isLoading: isChildOptionListLoading,
+  } = useOptionListSearch(
+    childOptionListSearchValue,
+    Boolean(childOptionListSearchValue),
+  );
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
+    resetField,
+
     formState: { isSubmitting, errors },
   } = useForm<CreateOptionItem>({
     resolver: zodResolver(createOptionItemSchema),
     defaultValues: {
       labelEn: "",
       labelNe: "",
+      childOptionListId: undefined,
       optionListId: optionListId,
     },
   });
@@ -61,6 +74,7 @@ export function SurveyOptionItemCreateModal({
   const handleSave = async (data: CreateOptionItem) => {
     const normalizedPayload = {
       optionListId: optionListId.trim(),
+      childOptionListId: data.childOptionListId,
       labelEn: data.labelEn.trim(),
       labelNe: data.labelNe.trim(),
     };
@@ -73,6 +87,7 @@ export function SurveyOptionItemCreateModal({
       reset({
         labelEn: "",
         labelNe: "",
+        childOptionListId: undefined,
         optionListId: optionListId,
       });
 
@@ -94,43 +109,72 @@ export function SurveyOptionItemCreateModal({
       disableClose={isSubmitting}
     >
       <form onSubmit={handleSubmit(handleSave)} className="mt-6 space-y-6">
-        <FormField
-          label="Name (EN)"
-          required
-          errorText={errors.labelEn?.message}
-        >
-          <Input
-            {...register("labelEn")}
-            placeholder="Enter English item name"
-            hasError={Boolean(errors.labelEn)}
-          />
-        </FormField>
+        <div className="grid grid-cols-2 gap-x-32">
+          <FormField
+            label="Name (EN)"
+            required
+            errorText={errors.labelEn?.message}
+          >
+            <Input
+              {...register("labelEn")}
+              placeholder="Enter English item name"
+              hasError={Boolean(errors.labelEn)}
+              block={true}
+            />
+          </FormField>
 
-        <FormField
-          label="Name (NE)"
-          required
-          errorText={errors.labelNe?.message}
-        >
-          <Input
-            {...register("labelNe")}
-            placeholder="Nepali item name"
-            hasError={Boolean(errors.labelNe)}
+          <Controller
+            name="childOptionListId"
+            control={control}
+            render={({ field }) => (
+              <FormField
+                label="Child Option List"
+                errorText={errors.childOptionListId?.message}
+              >
+                <SearchSelect
+                  searchValue={childOptionListSearchValue}
+                  onSearchValueChange={setChildOptionListSearchValue}
+                  onReset={() => resetField("childOptionListId")}
+                  onSelect={(value) => field.onChange(value.value)}
+                  selectedKey={field.value || ""}
+                  options={
+                    childOptionListData?.map(optionListToSelectOption) || []
+                  }
+                  error={Boolean(errors.childOptionListId)}
+                  errorMessage={errors.childOptionListId?.message}
+                  loading={isChildOptionListLoading}
+                  placeholder="Enter child option list ID"
+                />
+              </FormField>
+            )}
           />
-        </FormField>
+
+          <FormField
+            label="Name (NE)"
+            required
+            errorText={errors.labelNe?.message}
+          >
+            <Input
+              {...register("labelNe")}
+              placeholder="Nepali item name"
+              hasError={Boolean(errors.labelNe)}
+              block={true}
+            />
+          </FormField>
+        </div>
 
         {!optionListId ? (
-          <p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
+          <p className="rounded-field border border-error-100 bg-error-50 px-4 py-3 text-sm font-semibold text-error-600">
             Select a survey option before creating an item.
           </p>
         ) : null}
 
         {apiError ? (
-          <p className="rounded-(--mis-field-radius) border border-(--mis-color-error-100) bg-(--mis-color-error-50) px-4 py-3 text-sm font-semibold text-(--mis-color-error-600)">
+          <p className="rounded-field border border-error-100 bg-error-50 px-4 py-3 text-sm font-semibold text-error-600">
             {apiError}
           </p>
         ) : null}
-
-        <div className="flex flex-wrap justify-end gap-3 border-t border-(--mis-color-ink-200) pt-5">
+        <div className="flex flex-wrap justify-end gap-3 border-t border-ink-200 pt-5">
           <Button
             type="button"
             variant="ghost"
@@ -139,7 +183,11 @@ export function SurveyOptionItemCreateModal({
           >
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            onClick={() => console.log("Submit button clicked")}
+          >
             <Plus className="h-4 w-4" />
             {isSubmitting ? "Creating..." : "Create Option Item"}
           </Button>

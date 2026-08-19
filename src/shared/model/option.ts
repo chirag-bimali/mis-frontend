@@ -3,8 +3,9 @@ import { z } from "zod";
 export const optionItemSchema = z.object({
   id: z.guid(),
   optionListId: z.guid(),
-  labelEn: z.string().max(254),
-  labelNe: z.string().max(254),
+  labelEn: z.string().max(255),
+  labelNe: z.string().max(255),
+  childOptionListId: z.guid().optional(),
   extra: z.record(z.string(), z.unknown()).optional(),
 });
 
