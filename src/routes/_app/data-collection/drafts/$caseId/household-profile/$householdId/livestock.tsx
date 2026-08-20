@@ -1,6 +1,6 @@
 import { useCaseTreeStore, useFormDraftStore } from "@entities/case";
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_LIVESTOCK_KEY } from "@entities/case/model/keys";
-import Livestock from "@pages/data-collection/drafts/household-profile/livestock";
+import { LivestockSection } from "@pages/household-profile";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
@@ -49,5 +49,5 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  return <Livestock />;
+  return <LivestockSection />;
 }

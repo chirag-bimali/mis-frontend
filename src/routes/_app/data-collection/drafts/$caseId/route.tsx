@@ -5,7 +5,7 @@ import {
   useCaseTreeStore,
   useCaseUiStore,
 } from "@entities/case";
-import Forms from "@pages/data-collection/drafts/navigation";
+import Forms from "@pages/data-collection-draft-navigation";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app/data-collection/drafts/$caseId")({

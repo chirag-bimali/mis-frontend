@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import DataCollection from "@pages/data-collection/index";
+import DataCollection from "@pages/data-collection-main";
 
 export const Route = createFileRoute("/_app/data-collection/")({
   component: RouteComponent,

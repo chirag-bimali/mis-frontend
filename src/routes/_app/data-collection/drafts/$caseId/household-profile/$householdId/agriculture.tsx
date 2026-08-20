@@ -1,17 +1,13 @@
-import AgricultureFormPage from "@pages/data-collection/drafts/household-profile/agriculture";
 import { createFileRoute } from "@tanstack/react-router";
+import { AgricultureSection } from "@pages/household-profile";
 
 export const Route = createFileRoute(
   "/_app/data-collection/drafts/$caseId/household-profile/$householdId/agriculture",
 )({
-  component: RouteComponent,
+  component: AgricultureSection,
   beforeLoad: () => {
     return {
       breadcrumb: `Agriculture`,
     };
   },
 });
-
-function RouteComponent() {
-  return <AgricultureFormPage />;
-}

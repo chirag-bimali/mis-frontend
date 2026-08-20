@@ -1,12 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import SocialCultural from "@pages/data-collection/drafts/household-profile/social-cultural";
+import { SocialCulturalSection } from "@pages/household-profile";
 
 export const Route = createFileRoute(
   "/_app/data-collection/drafts/$caseId/household-profile/$householdId/social-cultural",
 )({
-  component: RouteComponent,
+  component: SocialCulturalSection,
 });
-
-function RouteComponent() {
-  return <SocialCultural />;
-}

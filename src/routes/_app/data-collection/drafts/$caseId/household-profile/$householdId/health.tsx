@@ -1,12 +1,8 @@
-import HealthForm from "@pages/data-collection/drafts/household-profile/health";
 import { createFileRoute } from "@tanstack/react-router";
+import { HealthSection } from "@pages/household-profile";
 
 export const Route = createFileRoute(
   "/_app/data-collection/drafts/$caseId/household-profile/$householdId/health",
 )({
-  component: RouteComponent,
+  component: HealthSection,
 });
-
-function RouteComponent() {
-  return <HealthForm />;
-}
