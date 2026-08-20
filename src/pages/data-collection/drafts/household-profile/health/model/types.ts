@@ -1,7 +1,7 @@
 import {
   optionItemSchema,
   optionListSchema,
-} from "@pages/master-setup-survey-options/model/types";
+} from "@shared/model";
 import { z } from "zod";
 
 // export const optionSchema = z.object({

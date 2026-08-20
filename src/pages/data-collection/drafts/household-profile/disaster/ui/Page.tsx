@@ -4,9 +4,9 @@ import Body from "./Body";
 import Footer from "./Footer";
 import Header from "./Header";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { defaultDecisionForm, decisionFormSchema, type DecisionForm } from "../model";
+import { defaultDisasterForm, disasterFormSchema, type DisasterFormValues } from "../model";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useFormDraftStore, HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY } from "@entities/case";
+import { useFormDraftStore, HOUSEHOLD_PROFILE_HOUSEHOLD_DISASTER_KEY } from "@entities/case";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ export default function Page() {
   const getCachedDraftValues = useFormDraftStore((s) => s.getCachedDraftValues);
 
   const { caseId, householdId } = useParams({
-    from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/decision-making",
+    from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/disaster",
   });
 
-  const methods = useForm<DecisionForm>({
-    resolver: zodResolver(decisionFormSchema),
+  const methods = useForm<DisasterFormValues>({
+    resolver: zodResolver(disasterFormSchema),
     defaultValues: {
-      ...defaultDecisionForm,
+      ...defaultDisasterForm,
       familyId: householdId,
     },
   });
@@ -29,33 +29,33 @@ export default function Page() {
   useEffect(() => {
     const cachedValues = getCachedDraftValues(
       caseId,
-      HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY(householdId),
-    ) as DecisionForm | undefined;
+      HOUSEHOLD_PROFILE_HOUSEHOLD_DISASTER_KEY(householdId),
+    ) as DisasterFormValues | undefined;
 
     if (cachedValues) {
       methods.reset(cachedValues);
     }
   }, [caseId, householdId, getCachedDraftValues, methods]);
 
-  const onSubmit = async (values: DecisionForm) => {
+  const onSubmit = async (values: DisasterFormValues) => {
     await saveDraftValues(
       caseId,
-      HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY(householdId),
+      HOUSEHOLD_PROFILE_HOUSEHOLD_DISASTER_KEY(householdId),
       values,
     );
   };
 
   const goPrevious = () => {
     navigate({
-      to: "/data-collection/drafts/$caseId/household-profile/$householdId/livestock",
+      to: "/data-collection/drafts/$caseId/household-profile/$householdId/social-cultural",
       params: { caseId, householdId },
     });
   };
 
   const goNext = () => {
     navigate({
-      to: "/data-collection/drafts/$caseId/household-profile/$householdId/social-cultural",
-      params: { caseId, householdId },
+      to: "/data-collection/drafts/$caseId/household-profile",
+      params: { caseId },
     });
   };
 

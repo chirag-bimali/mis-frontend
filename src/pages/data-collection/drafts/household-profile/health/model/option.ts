@@ -1,13 +1,12 @@
 import {
   optionItemSchema,
   optionListSchema,
-  type OptionList,
 } from "@shared/model";
 // import { Health } from "./types";
 // import type { OptionItem } from "@pages/master-setup-survey-options/model";
 import z from "zod";
 
-export const ILLNESS_OPTIONS: OptionList = {
+export const ILLNESS_OPTIONS = {
   id: "Illness",
   labelEn: "Illness Types",
   labelNe: "बीमारी का प्रकारहरू",

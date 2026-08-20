@@ -1,12 +1,13 @@
-import { decisionSchema } from "@entities/data-collection/decision";
 import { z } from "zod";
 
-export const decisionFormSchema = decisionSchema.omit({
-  householdExpense: true,
-  property: true,
-  education: true,
-  investment: true,
-  governance: true,
+export const decisionFormSchema = z.object({
+  id: z.string().optional(),
+  familyId: z.string().optional(),
+  householdExpenseId: z.string().optional(),
+  propertyId: z.string().optional(),
+  educationId: z.string().optional(),
+  investmentId: z.string().optional(),
+  governanceId: z.string().optional(),
 });
 
 export type DecisionForm = z.infer<typeof decisionFormSchema>;

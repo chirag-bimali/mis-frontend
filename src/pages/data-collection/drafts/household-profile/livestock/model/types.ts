@@ -1,11 +1,10 @@
 import { z } from "zod";
-import { livestockAnimal } from "@entities/data-collection/livestock";
 
 // One row in the animal census: which animal type was selected and its count.
 // Reuses the livestockAnimal entity schema, dropping server-managed fields.
-export const livestockAnimalFormSchema = livestockAnimal.pick({
-  animalTypeId: true,
-  count: true,
+export const livestockAnimalFormSchema = z.object({
+  animalTypeId: z.string().min(1, "Animal type is required"),
+  count: z.number().int().min(1, "Count must be at least 1"),
 });
 
 // AI service practice details. Reuses the livestockAiService entity schema,

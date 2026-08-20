@@ -1,16 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import DisasterPage from "@pages/data-collection/drafts/household-profile/disaster";
 
 export const Route = createFileRoute(
-  '/_app/data-collection/drafts/$caseId/household-profile/$householdId/disaster',
+  "/_app/data-collection/drafts/$caseId/household-profile/$householdId/disaster",
 )({
-  component: RouteComponent,
-})
-
-function RouteComponent() {
-  return (
-    <div>
-      Hello
-      "/_app/data-collection/forms/drafts/$surveyId/household-profile/disaster"!
-    </div>
-  )
-}
+  component: DisasterPage,
+});
