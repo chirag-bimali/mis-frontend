@@ -1,7 +1,7 @@
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_DISASTER_KEY } from "@entities/case";
 import { AlertTriangle } from "lucide-react";
 import { defaultDisasterForm, disasterFormSchema } from "../model";
-import { HouseholdProfileFormRunner } from "../../shared/ui/HouseholdProfileFormRunner";
+import { HouseholdProfileFormRunner } from "@widgets/household-profile";
 import Body from "./Body";
 
 export default function Page() {

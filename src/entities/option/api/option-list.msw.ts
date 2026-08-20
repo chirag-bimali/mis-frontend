@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { type OptionList } from "@shared/model";
 import type { ApiResponse } from "@shared/model";
-import { env } from "@shared/config/env";
+import { env } from "@shared/config";
 
 const optionList: OptionList[] = [
   {

@@ -1,7 +1,7 @@
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY } from "@entities/case";
 import { Users2 } from "lucide-react";
 import { defaultDecisionForm, decisionFormSchema } from "../model";
-import { HouseholdProfileFormRunner } from "../../shared/ui/HouseholdProfileFormRunner";
+import { HouseholdProfileFormRunner } from "@widgets/household-profile";
 import Body from "./Body";
 
 export default function Page() {

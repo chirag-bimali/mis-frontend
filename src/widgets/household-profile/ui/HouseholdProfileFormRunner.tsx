@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "@tanstack/react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ZodType } from "zod";
 import { useFormDraftStore } from "@entities/case";
-import { FAMILY_SECTIONS } from "../../navigation/model";
+import { FAMILY_SECTIONS } from "../model/family-sections";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { Button } from "@shared/ui/Button";
 import type { FileRoutesById } from "@app/routeTree.gen";

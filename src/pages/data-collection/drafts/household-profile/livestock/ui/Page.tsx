@@ -1,7 +1,7 @@
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_LIVESTOCK_KEY } from "@entities/case";
 import { Dog } from "lucide-react";
 import { livestockFormSchema, type LivestockFormValues } from "../model";
-import { HouseholdProfileFormRunner } from "../../shared/ui/HouseholdProfileFormRunner";
+import { HouseholdProfileFormRunner } from "@widgets/household-profile";
 import Body from "./Body";
 
 const defaultValues: LivestockFormValues = {

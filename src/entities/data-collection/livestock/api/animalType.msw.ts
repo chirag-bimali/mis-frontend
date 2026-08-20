@@ -1,4 +1,4 @@
-import { env } from "@shared/config/env";
+import { env } from "@shared/config";
 import type { ApiResponse, OptionItem } from "@shared/model";
 import { http, HttpResponse } from "msw";
 

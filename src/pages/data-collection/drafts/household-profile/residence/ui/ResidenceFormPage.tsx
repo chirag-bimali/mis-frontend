@@ -10,7 +10,7 @@ import { ResidenceSchema, type Residence } from "../model/types";
 import { HOUSEHOLD_PROFILE_HOUSEHOLD_RESIDENCE_KEY } from "@entities/case";
 import { useOptionItemByOptionListKey } from "@entities/option";
 import { optionItemToSelectOption } from "@entities/option";
-import { HouseholdProfileFormRunner } from "../../shared/ui/HouseholdProfileFormRunner";
+import { HouseholdProfileFormRunner } from "@widgets/household-profile";
 
 const defaultValues: Residence = {
   ownershipStatus: "",
