@@ -1,9 +1,14 @@
-import type { LinkProps } from "@tanstack/react-router";
+import type { FileRoutesById } from "@app/routeTree.gen";
+
+type HouseholdProfileRoute = Extract<
+  keyof FileRoutesById,
+  `/_app/data-collection/drafts/$caseId/household-profile/$householdId/${string}`
+>;
 
 export interface FamilySection {
   id: string;
   label: string;
-  link: LinkProps["to"];
+  link: HouseholdProfileRoute extends `/_app${infer Route}` ? Route : false;
 }
 
 export const FAMILY_SECTIONS: FamilySection[] = [
