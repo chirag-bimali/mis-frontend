@@ -1,78 +1,22 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY } from "@entities/case";
+import { Users2 } from "lucide-react";
+import { defaultDecisionForm, decisionFormSchema } from "../model";
+import { HouseholdProfileFormRunner } from "../../shared/ui/HouseholdProfileFormRunner";
 import Body from "./Body";
-import Footer from "./Footer";
-import Header from "./Header";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { defaultDecisionForm, decisionFormSchema, type DecisionForm } from "../model";
-import { useNavigate, useParams } from "@tanstack/react-router";
-import { useFormDraftStore, HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY } from "@entities/case";
 
 export default function Page() {
-  const navigate = useNavigate();
-
-  const saveDraftValues = useFormDraftStore((s) => s.saveDraftValues);
-  const getCachedDraftValues = useFormDraftStore((s) => s.getCachedDraftValues);
-
-  const { caseId, householdId } = useParams({
-    from: "/_app/data-collection/drafts/$caseId/household-profile/$householdId/decision-making",
-  });
-
-  const methods = useForm<DecisionForm>({
-    resolver: zodResolver(decisionFormSchema),
-    defaultValues: {
-      ...defaultDecisionForm,
-      familyId: householdId,
-    },
-  });
-
-  useEffect(() => {
-    const cachedValues = getCachedDraftValues(
-      caseId,
-      HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY(householdId),
-    ) as DecisionForm | undefined;
-
-    if (cachedValues) {
-      methods.reset(cachedValues);
-    }
-  }, [caseId, householdId, getCachedDraftValues, methods]);
-
-  const onSubmit = async (values: DecisionForm) => {
-    await saveDraftValues(
-      caseId,
-      HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY(householdId),
-      values,
-    );
-  };
-
-  const goPrevious = () => {
-    navigate({
-      to: "/data-collection/drafts/$caseId/household-profile/$householdId/livestock",
-      params: { caseId, householdId },
-    });
-  };
-
-  const goNext = () => {
-    navigate({
-      to: "/data-collection/drafts/$caseId/household-profile/$householdId/social-cultural",
-      params: { caseId, householdId },
-    });
-  };
-
   return (
-    <section className="flex flex-col h-full overflow-hidden bg-white shadow-sm">
-      <div>
-        <Header />
-      </div>
-      <FormProvider {...methods}>
-        <form
-          className="flex flex-1 flex-col overflow-hidden"
-          onSubmit={methods.handleSubmit(onSubmit)}
-        >
-          <Body />
-          <Footer onPrevious={goPrevious} onNext={goNext} />
-        </form>
-      </FormProvider>
-    </section>
+    <HouseholdProfileFormRunner
+      sectionId="decision-making"
+      title="Decision Making"
+      labelNe="(निर्णय प्रक्रिया)"
+      icon={<Users2 className="h-6 w-6" />}
+      schema={decisionFormSchema}
+      defaultValues={defaultDecisionForm}
+      draftKeyFn={HOUSEHOLD_PROFILE_HOUSEHOLD_DECISION_MAKING_KEY}
+      routeFrom="/_app/data-collection/drafts/$caseId/household-profile/$householdId/decision-making"
+    >
+      <Body />
+    </HouseholdProfileFormRunner>
   );
 }
