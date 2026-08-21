@@ -1,12 +1,8 @@
-import MemberFormPage from "@pages/data-collection/drafts/household-profile/member";
 import { createFileRoute } from "@tanstack/react-router";
+import { MemberSection } from "@pages/household-profile";
 
 export const Route = createFileRoute(
   "/_app/data-collection/drafts/$caseId/household-profile/$householdId/member",
 )({
-  component: RouteComponent,
+  component: MemberSection,
 });
-
-function RouteComponent() {
-  return <MemberFormPage />;
-}

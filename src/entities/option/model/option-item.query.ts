@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import type { OptionItem } from "../model";
+import type { OptionItem } from "@shared/model";
 
 import {
   getOptionItemById,

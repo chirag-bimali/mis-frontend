@@ -3,12 +3,18 @@ import type { InternalAxiosRequestConfig } from "axios";
 import { env } from "@shared/config/env";
 import type { ApiResponse } from "@shared/model";
 
-// export type ApiError = {
-//   status: number;
-//   code: string;
-//   message: string;
-//   error?: unknown;
-// };
+export type ApiError = {
+  message: string;
+  success: boolean;
+  statusCode: number;
+  timestamp: Date;
+  error?: {
+    code: string;
+    message: string;
+    details: Record<string, unknown>;
+    rowErrors: Record<string, unknown>;
+  };
+};
 
 const buildError = (error: AxiosError): ApiResponse<object> => {
   const data = error.response?.data as ApiResponse<object>;

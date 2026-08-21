@@ -2,7 +2,8 @@ import { useState } from "react";
 import { SurveyOptionCreateModal } from "./SurveyOptionCreateModel";
 import { SurveyOptionItems } from "./SurveyOptionItems";
 import { SurveyOption } from "./SurveyOption";
-import { useOptionList, type OptionList } from "@entities/option";
+import { useOptionList } from "@entities/option";
+import { type OptionList } from "@shared/model";
 
 export function SurveyOptionPage() {
   const { data: optionList } = useOptionList();

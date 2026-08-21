@@ -64,26 +64,22 @@ export const SearchSelect = ({
     setFocused(false);
   };
   return (
-    <div className={cn("relative w-full bg-white", className)}>
+    <div className={cn("relative w-full", className)}>
       <div className="relative w-full">
         <div className={cn("w-full")}>
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-(--mis-color-ink-500)" />
-          <div className="flex items-center">
+          <Search className="pointer-events-none absolute left-3 z-50 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-500" />
+          <div className="flex items-center w-full">
             <Input
               value={searchValue}
               onChange={(e) => onSearchValueChange(e.target.value)}
               onFocus={onFocus}
               onBlur={onBlur}
               placeholder={placeholder}
-              className={cn("px-field-px h-full py-field pl-8")}
+              className={cn("h-full pl-7")}
               disabled={selectedKey ? true : false}
+              block={true}
             />
-            <div
-              className={cn(
-                "absolute right-0 left-0 top-0 flex justify-end",
-                !selectedKey && "hidden",
-              )}
-            >
+            <div className={cn(!selectedKey && "hidden")}>
               <Button
                 variant="ghost"
                 className="border border-l-0 rounded-r-field border-transparent rounded-l-none h-full px-field-px py-field-py"

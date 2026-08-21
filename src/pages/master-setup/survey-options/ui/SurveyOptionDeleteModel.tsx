@@ -6,7 +6,8 @@ import { useState } from "react";
 import type { ApiError } from "@shared/api";
 import { Button } from "@shared/ui/Button";
 import { Modal } from "@shared/ui/Modal";
-import { useDeleteOptionList, type OptionList } from "@entities/option";
+import { useDeleteOptionList } from "@entities/option";
+import { type OptionList } from "@shared/model";
 
 interface SurveyOptionDeleteModalProps {
   isOpen: boolean;

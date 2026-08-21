@@ -38,7 +38,7 @@ export function FormField({
     <>
       {label}
       {labelSuffix && (
-        <span className="text-xs font-normal text-(--mis-color-ink-500)">
+        <span className="text-xs font-normal text-ink-500">
           {labelSuffix}
         </span>
       )}

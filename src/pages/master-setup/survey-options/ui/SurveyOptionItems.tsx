@@ -6,11 +6,8 @@ import { Button } from "@shared/ui/Button";
 import { SurveyOptionItemCreateModal } from "./SurveyOptionItemCreateModel";
 import { SurveyOptionItemEditModal } from "./SurveyOptionItemEditModel";
 import { SurveyOptionItemDeleteModal } from "./SurveyOptionItemDeleteModel";
-import {
-  useOptionItemsByOptionList,
-  type OptionItem,
-  type OptionList,
-} from "@entities/option";
+import { type OptionItem, type OptionList } from "@shared/model";
+import { useOptionItemsByOptionList } from "@entities/option";
 
 type SurveyOptionsItemsProps = {
   selectedOptionList?: OptionList;

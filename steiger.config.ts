@@ -5,7 +5,7 @@ export default defineConfig([
   ...fsd.configs.recommended,
   {
     rules: {
-      // "fsd/insignificant-slice": "off",
+      "fsd/insignificant-slice": "off",
     },
   },
 ]);

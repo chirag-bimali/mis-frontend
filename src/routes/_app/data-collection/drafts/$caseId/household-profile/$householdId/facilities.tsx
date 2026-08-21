@@ -1,12 +1,8 @@
-import FacilityPage from "@pages/data-collection/drafts/household-profile/facility";
 import { createFileRoute } from "@tanstack/react-router";
+import { FacilitiesSection } from "@pages/household-profile";
 
 export const Route = createFileRoute(
   "/_app/data-collection/drafts/$caseId/household-profile/$householdId/facilities",
 )({
-  component: RouteComponent,
+  component: FacilitiesSection,
 });
-
-function RouteComponent() {
-  return <FacilityPage />;
-}

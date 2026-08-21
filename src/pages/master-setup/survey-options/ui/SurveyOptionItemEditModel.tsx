@@ -9,10 +9,10 @@ import { Input } from "@shared/ui";
 import { Modal } from "@shared/ui";
 import {
   updateOptionItemSchema,
-  useUpdateOptionItem,
   type OptionItem,
   type UpdateOptionItem,
-} from "@entities/option";
+} from "@shared/model";
+import { useUpdateOptionItem } from "@entities/option";
 
 // import { useUpdateOptionItem } from "../api";
 // import type { OptionItem } from "../model";

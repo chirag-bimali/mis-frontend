@@ -46,6 +46,9 @@
       "@widgets/*": [
         "./src/widgets/*"
       ],
+      "@widgets": [
+        "./src/widgets"
+      ],
       "@features/*": [
         "./src/features/*"
       ],
